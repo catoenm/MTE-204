@@ -13,12 +13,10 @@ function [UGLOBAL,FIXED] = buildNODEBCs(UGLOBAL,NODAL_BCS,DOF)
 % % % perscribed boundary condition.  The function also returns the vector
 % % % of indices of known displacements 
 
-    n = size(UGLOBAL)/DOF;
-
     FIXED = [n*DOF,1];
     
     for a = 1 : NODAL_BCS
-        FIXED(a) = (NODAL_BCS(a,1) * NODAL_BCS(a,2)) + n - 1;
+        FIXED(a) = (NODAL_BCS(a,1) * DOF) + NODAL_BCS(a,2) - 1;
     end
     
     for b = 1 : FIXED
