@@ -1,3 +1,7 @@
+% This is a test file for solveKU.m. 
+% It uses a Mixed Method LU Decomposition problem from Tutorial 1 of
+% MTE204.
+
 clear all
 clc
 
