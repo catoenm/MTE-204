@@ -15,11 +15,11 @@ function [UGLOBAL,FIXED] = buildNODEBCs(UGLOBAL,NODAL_BCS,DOF)
 
     FIXED = [n*DOF,1];
     
-    for a = 1 : NODAL_BCS
+    for a = 1 : size(NODAL_BCS,1)
         FIXED(a) = (NODAL_BCS(a,1) * DOF) + NODAL_BCS(a,2) - 1;
     end
     
-    for b = 1 : FIXED
+    for b = 1 : size(FIXED,1)
         UGLOBAL(FIXED(b)) = NODAL_BCS(b,3);
     end
 
