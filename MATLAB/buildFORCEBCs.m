@@ -16,18 +16,21 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
 % % % This function updates and returns the global force vector with the known
 % % % perscribed boundary force condition.  The function also returns the vector
 % % % of indices of known forces. 
-
-    FREE = [(N*DOF)-size(FIXED,1),1];
+    
+    FREE = zeros(N-size(FIXED,1),1);
     
     % NODAL_FORCES contains info on nodal forces in the row form [NODE, AXIS, VALUE]
 
-
-    for a = 1 : size(FREE,1) % iterate through FREE vector
-        FREE(a,1) = (NODAL_FORCES(a,1) * DOF) + NODAL_FORCES(a,2) - DOF; % locates y coordinate, if x coordinate, subtracts index value by 1 
+    counter = 1;
+    for a = 1 : N % for range N*DOF
+        if (~ismember(a,FIXED))
+            FREE(counter,1) = a;
+            counter = counter + 1;
+        end
     end
-    
-    for b = 1 : size(FIXED,1)
-        FGLOBAL(FREE(b),1) = NODAL_FORCES(b,3); % adds nodal force to corresponding index in global force matrix
+    FREE
+    for b = 1 : size(NODAL_FORCES,1)
+        FGLOBAL(FREE(b,1),1) = NODAL_FORCES(b,3); % adds nodal force to corresponding index in global force matrix
     end
 
 end
