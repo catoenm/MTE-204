@@ -19,12 +19,15 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
 
     FREE = [(N*DOF)-size(FIXED,1),1];
     
-    for a = 1 : size(FREE,1)
-        FREE(a,1) = (NODAL_FORCES(a,1) * DOF) + NODAL_FORCES(a,2) - 2;
+    % NODAL_FORCES contains info on nodal forces in the row form [NODE, AXIS, VALUE]
+
+
+    for a = 1 : size(FREE,1) % iterate through FREE vector
+        FREE(a,1) = (NODAL_FORCES(a,1) * DOF) + NODAL_FORCES(a,2) - DOF; % locates y coordinate, if x coordinate, subtracts index value by 1 
     end
     
     for b = 1 : size(FIXED,1)
-        FGLOBAL(FREE(b),1) = NODAL_FORCES(b,3);
+        FGLOBAL(FREE(b),1) = NODAL_FORCES(b,3); % adds nodal force to corresponding index in global force matrix
     end
 
 end
