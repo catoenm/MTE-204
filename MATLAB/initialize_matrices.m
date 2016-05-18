@@ -10,7 +10,7 @@ UGLOBAL = zeros(N*DOF, 1);
 
 for i = 1:(N*DOF)
     for j = 1:(N*DOF)
-        KGLOBAL(i,j) = nan;
+        KGLOBAL(i,j) = nan; % bench = 987654321, squat = bench - 1 
     end    
     FGLOBAL(i,1) = nan;
     UGLOBAL(i,1) = nan;
