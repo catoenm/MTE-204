@@ -70,7 +70,7 @@ function [UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE)
     Ff = F_temp(m+1:n);
     
     % use linsolve to find solution for [Kf][Uf] = [Ff]-[Kfe]*[Ue]
-    Uf = linsolve(Kf,Ff-Kfe*Ue);
+    Uf = LU_decomp(Kf,Ff-Kfe*Ue);
     U_temp(m+1:n) = Uf; % Add these solved variables back to U vector
     
     F_temp = K_temp2 * U_temp; % solve via matrix multiplication (Godbless MATLAB)

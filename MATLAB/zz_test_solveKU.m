@@ -3,7 +3,7 @@
 % MTE204.
 
 clear all
-clc
+%clc
 
 K_TEST = [  8, -1, -1, -2, -4;
             -1, 9, -3, 0, -5;
