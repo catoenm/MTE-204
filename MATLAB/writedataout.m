@@ -3,10 +3,10 @@ function writedataout(filename,NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
 % % % required as presented in the DEMO submission file.
 
 % % % This function also determines what stress state a member is under.
-fid0 = fopen('./name_id.txt','w'); %opens name file
+fid0 = fopen('./name_id.txt','r'); %opens name file
 nFile = textscan(fid0, '%s','delimiter', '\n'); % reads in name file delimiting breaks
 fclose(fid0); % close name file
-fid1 = fopen('./headings.txt','w'); % opens file with premade output lines
+fid1 = fopen('./headings.txt','r'); % opens file with premade output lines
 hFile = textscan(fid1, '%s','delimiter', '\n'); % reads in heading file delimiting breaks
 fclose(fid1); % close heading file
 
