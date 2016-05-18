@@ -107,7 +107,7 @@ end
 
 fprintf(fid2, '\n%s\n%s\n%s\n', hFile{7}, hFile{8}, hFile{9});
 
-nCol = sizeof(SCTR,2);
+nCol = size(SCTR,2);
 for ii = 1:nRows
     fprintf(fid2,'%d, ',ii);
     for jj = 1:nCol
