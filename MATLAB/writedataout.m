@@ -10,7 +10,7 @@ fid1 = fopen('./headings.txt','w');
 hFile = textcan(fid1, '%s','delimiter', '\n');
 fclose(fid1);
 
-if (exist('./' + filename + '.txt','file') ~= 0)
+if exist('./' + filename + '.txt','file') ~= 0
     delete('./' + filename + '.txt');
 end
 
@@ -33,7 +33,7 @@ nRows = size(FGLOBAL, 1);
 for ii = 1:nRows
     fprintf(fid2,'F%c = %10.5f',32+ii,FGLOBAL(ii)); %file id, %f the location of the value
     %assumes less than 26 values
-    if (mod(ii,2)==0)
+    if mod(ii,2)==0
         fprintf(fid2,'\n');
     else
         fprintf(fid2,', ');
@@ -65,7 +65,7 @@ for ii = 1:nRows
     
     fprintf(fid2,'%10.5f',UGLOBAL(ii)); %file id, %f the location of the value
 
-    if (mod(ii,2)==0)
+    if mod(ii,2)==0
         fprintf(fid2,'\n');
     else
         fprintf(fid2,', ');
@@ -98,7 +98,7 @@ for ii = 1:nRows
     
     fprintf(fid2,'%10.5f',NODES(ii)); %file id, %f the location of the value
     
-    if (mod(ii,2)== 0)
+    if mod(ii,2)== 0
         fprintf(fid2,'\n');
     else
         fprintf(fid2,', ');
@@ -120,16 +120,4 @@ for ii = 1:nRows
     else
         fprintf(fid2,'[Tension]');  
     end
-end
-
-
-
-
-
-
-
-
-
-
-
-    
+end    
