@@ -4,6 +4,16 @@ function [KGLOBAL,FGLOBAL,UGLOBAL] = initialize_matrices(DOF,N)
 % % % The function returns an initilized Kglobal, Fglobal, and Uglobal
 % % % matrix.
 
+KGLOBAL = zeros(N*DOF, N*DOF);
+FGLOBAL = zeros(N*DOF, 1);
+UGLOBAL = zeros(N*DOF, 1);
 
+for i = 1:(N*DOF)
+    for j = 1:(N*DOF)
+        KGLOBAL(i,j) = nan;
+    end    
+    FGLOBAL(i,1) = nan;
+    UGLOBAL(i,1) = nan;
+end
 
 end
