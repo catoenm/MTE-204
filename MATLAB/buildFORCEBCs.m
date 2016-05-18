@@ -17,7 +17,7 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
 % % % perscribed boundary force condition.  The function also returns the vector
 % % % of indices of known forces. 
 
-    FREE = [(N*DOF)-size(FIXED,1),1];
+    FREE = zeros((N*DOF)-size(FIXED,1),1);
     
     % NODAL_FORCES contains info on nodal forces in the row form [NODE, AXIS, VALUE]
 
