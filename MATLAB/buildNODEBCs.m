@@ -24,5 +24,4 @@ function [UGLOBAL,FIXED] = buildNODEBCs(UGLOBAL,NODAL_BCS,DOF)
     for b = 1 : size(FIXED,1)
         UGLOBAL(FIXED(b,1)) = NODAL_BCS(b,3);
     end
-
 end
