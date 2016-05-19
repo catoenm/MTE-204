@@ -51,13 +51,13 @@ clear all;
 % % % **********************************************************
 % % % Step 6: Solve for Displacements and Forces
 % % % **********************************************************
-[UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE);
+[UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE)
 
 % % % **********************************************************
 % % % Step 7: Post Processing
 % % % **********************************************************   
 [STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL);
-%writedataout('projectSOLUTIONS_1a_2.txt',NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
+writedataout('projectSOLUTIONS_1a.txt',NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
 
 
 

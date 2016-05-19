@@ -25,7 +25,7 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
     % IF AN INDEX VALUE IS NOT IN FREE, IT IS IN FIXED
     % INDICES OF FREE + INDICES OF FIXED = FULL RANGE OF N
 
-    FREE = zeros((N*DOF)-size(FIXED,1),1);
+    FREE = zeros((N)-size(FIXED,1),1);
     
     % NODAL_FORCES contains info on nodal forces in the row form [NODE, AXIS, VALUE]
 
@@ -37,10 +37,11 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
         end
     end
     
+    FGLOBAL(FIXED,1) = nan;
+    
     for b = 1 : size(NODAL_FORCES,1) % FOR 
-        force_index = NODAL_FORCES(b,1) * DOF + (NODAL_FORCES(b,2) - DOF)
+        force_index = NODAL_FORCES(b,1) * DOF + (NODAL_FORCES(b,2) - DOF);
         FGLOBAL(force_index) = NODAL_FORCES(b,3); % adds nodal force to corresponding index in global force matrix
     end
     
-    FGLOBAL(FIXED,1) = nan;
 end

@@ -1,6 +1,6 @@
 ///***************************************************
-/// SOLUTIONS TO Problem 1a – 2016
-/// SOLUTIONS TO Problem 1b – 2016
+/// SOLUTIONS TO Problem 1a - 2016
+/// SOLUTIONS TO Problem 1b - 2016
 ///***************************************************
 /// Calculated Forces (N)
 /// NODAL POSITIONS (mm)

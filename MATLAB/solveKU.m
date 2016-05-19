@@ -59,7 +59,7 @@ function [UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE)
         end
     end
     
-    %commented out submatrices that are not used for calculations
+    % commented out submatrices that are not used for calculations
     %Ke = K_temp2(1:m,1:m); 
     Kfe = K_temp2(m+1:n,1:m);
     %Kef = K_temp2(1:m,m+1:n);
@@ -69,7 +69,7 @@ function [UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE)
     %Fe = F_temp(1:m);
     Ff = F_temp(m+1:n);
     
-    % use linsolve to find solution for [Kf][Uf] = [Ff]-[Kfe]*[Ue]
+    % use LU decomposition to find solution for [Kf][Uf] = [Ff]-[Kfe]*[Ue]
     Uf = LU_decomp(Kf,Ff-Kfe*Ue);
     U_temp(m+1:n) = Uf; % Add these solved variables back to U vector
     

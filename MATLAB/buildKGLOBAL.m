@@ -14,7 +14,7 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
     e = size(SCTR, 1); % e is the # of elements/rows in SCTR
 
     % initializing in properties matrix
-    props = zeros(e, 2); 
+    geometric_props = zeros(e, 2); 
 
     %Calculating properties
     for i = 1:e % each element
@@ -30,15 +30,15 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
             angle = 0; 
         end
         
-        props(i, 1) = YOUNG(i,1) * AREA(i,1) / length; % E *A / L <= formula to get stiffness of a material
-        props(i, 2) = angle; % add angle to properties
+        geometric_props(i, 1) = YOUNG(i,1) * AREA(i,1) / length; % E *A / L <= formula to get stiffness of a material
+        geometric_props(i, 2) = angle; % add angle to properties
     end
 
     %One dimensional case
     if DOF == 1  
         A = [1 -1; -1 1]; % transformation
         for el = 1:e % each element
-            KLOCAL = props(el,1)*A; % get stiffness for this local kmatrix from property matrix
+            KLOCAL = geometric_props(el,1)*A; % get stiffness for this local kmatrix from property matrix
             for i = 1:2
                 for j = 1:2
                     index1 = SCTR(el,i); 
@@ -53,8 +53,8 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
     if DOF == 2
         for el = 1:e
            %Keff values
-           theta = props(el, 2); % angle between the local axis and the global axis
-           stiffness = props(el, 1); % stiffness of the current element
+           theta = geometric_props(el, 2); % angle between the local axis and the global axis
+           stiffness = geometric_props(el, 1); % stiffness of the current element
            a = cos(theta); % a is the consine of the angle 
            b = sin(theta); % b " " sine
            a2 = a^2 * stiffness;
@@ -77,10 +77,10 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
                    else
                       Keff = Kn;
                    end
-                   KGLOBAL(index1, index2)     = KGLOBAL(index1, index2) + Keff(i, j); % superpositioning force onto index in global kmatrix
-                   KGLOBAL(index1, index2+1)   = KGLOBAL(index1, index2+1) + Keff(i, j); %
-                   KGLOBAL(index1+1, index2)   = KGLOBAL(index1+1, index2) + Keff(i, j); %
-                   KGLOBAL(index1+1, index2+1) = KGLOBAL(index1+1, index2+1) + Keff(i, j); %
+                   KGLOBAL(index1, index2)     = KGLOBAL(index1, index2) + Keff(1, 1); % superpositioning force onto index in global kmatrix
+                   KGLOBAL(index1, index2+1)   = KGLOBAL(index1, index2+1) + Keff(1, 2); %
+                   KGLOBAL(index1+1, index2)   = KGLOBAL(index1+1, index2) + Keff(2, 1); %
+                   KGLOBAL(index1+1, index2+1) = KGLOBAL(index1+1, index2+1) + Keff(2, 2); %
                end
            end
         end
