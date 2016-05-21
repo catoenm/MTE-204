@@ -11,8 +11,10 @@ Name Student 6: Justin Lim ID: 20555755
 /// SOLUTIONS TO Problem 1a - 2016
 ///***************************************************
 /// Calculated Forces (N)
-FA = 2630.000000, FB = 600.000000
-FC = 380.000000, FD = 3550.000000
+FA = 2630.000000
+FB = 600.000000
+FC = 380.000000
+FD = 3550.000000
 
 /// NODAL POSITIONS (mm)
 U1x  =    0.00000, U1y  =    0.00000
