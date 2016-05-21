@@ -41,16 +41,6 @@ fprintf(fid2,'FB = 600.000000\n');
 fprintf(fid2,'FC = 380.000000, ');
 fprintf(fid2,'FD = 3550.000000\n');
 
-% for ii = 1:nRows
-%     fprintf(fid2,'F%c = %10.5f',64+ii,FGLOBAL(ii)); %file id, %f the location of the value
-%     %assumes less than 26 values
-%     if mod(ii,2)==0
-%         fprintf(fid2,'\n');
-%     else
-%         fprintf(fid2,', ');
-%     end
-% end
-
 fprintf(fid2, '\n%s\n', char(hFile{1,1}(6,1)));
 
 count = 1;
