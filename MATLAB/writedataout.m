@@ -36,9 +36,9 @@ nRows = size(FGLOBAL, 1); %gets number of elements
 
 %nRows should be same for following matrices: 
 %FGLOBAL, UGLOBAL, NODES
-fprintf(fid2,'FA = 2630.000000\n');
+fprintf(fid2,'FA = 2630.000000, ');
 fprintf(fid2,'FB = 600.000000\n');
-fprintf(fid2,'FC = 380.000000\n');
+fprintf(fid2,'FC = 380.000000, ');
 fprintf(fid2,'FD = 3550.000000\n');
 
 % for ii = 1:nRows
