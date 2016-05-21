@@ -12,6 +12,7 @@ function [STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL)
     NEWNODES = zeros(size(NODES));
     for i = 1:size(NODES,1)
         for j = 1:DOF
+            DOF*(i-1)+j
             NEWNODES(i,j) = NODES(i,j) + UGLOBAL(DOF*(i-1)+j);
         end
     end
@@ -22,17 +23,23 @@ function [STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL)
     new_length = zeros(size(SCTR,1));
     
     % Calculate lengths
+    
     initial_sum_of_squares = 0;
-    for i = 1:DOF
-        initial_sum_of_squares = initial_sum_of_squares + (NODES(SCTR(:,1),i)-NODES(SCTR(:,2),i)).^2
+    for i = i:DOF
+    
     end
-    initial_length = sqrt(initial_sum_of_squares)
+    
+    initial_length = sqrt( (NODES(SCTR(:,1),1)-NODES(SCTR(:,2),1)).^2 + ...
+                           (NODES(SCTR(:,1),2)-NODES(SCTR(:,2),2)).^2 ...
+                         );
 
     final_sum_of_squares = 0;
-    for i = 1:DOF
-        final_sum_of_squares = final_sum_of_squares + (NEWNODES(SCTR(:,1),i)-NEWNODES(SCTR(:,2),i)).^2;
+    for i = i:DOF
+        final_sum_of_squares = final_sum_of_squares + (NEWNODES(SCTR(:,1),1)-NEWNODES(SCTR(:,2),1)).^2
     end
-    new_length = sqrt(final_sum_of_squares);
+    new_length = sqrt( (NEWNODES(SCTR(:,1),1)-NEWNODES(SCTR(:,2),1)).^2 + ...
+                       (NEWNODES(SCTR(:,1),2)-NEWNODES(SCTR(:,2),2)).^2 ...
+                     );
     
     % Calculate stress
     STRESS = ((new_length - initial_length)./initial_length).*YOUNG;
