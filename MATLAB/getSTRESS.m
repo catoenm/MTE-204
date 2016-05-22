@@ -24,9 +24,9 @@ function [STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL)
     % Calculate lengths
     initial_sum_of_squares = 0;
     for i = 1:DOF
-        initial_sum_of_squares = initial_sum_of_squares + (NODES(SCTR(:,1),i)-NODES(SCTR(:,2),i)).^2
+        initial_sum_of_squares = initial_sum_of_squares + (NODES(SCTR(:,1),i)-NODES(SCTR(:,2),i)).^2;
     end
-    initial_length = sqrt(initial_sum_of_squares)
+    initial_length = sqrt(initial_sum_of_squares);
 
     final_sum_of_squares = 0;
     for i = 1:DOF
