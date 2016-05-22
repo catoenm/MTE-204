@@ -11,13 +11,13 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
     % % % At the end of the function, the fully assembled Kglobal matrix is
     % % % returned.
 
-    e = size(SCTR, 1); % e is the # of elements/rows in SCTR
+    sctr_size = size(SCTR, 1); % # of elements/rows in SCTR
 
     % initializing in properties matrix
-    geometric_props = zeros(e, 2); 
+    geometric_props = zeros(sctr_size, 2); 
 
     %Calculating properties
-    for i = 1:e % each element
+    for i = 1:sctr_size % each element
         index1 = SCTR(i, 1); % index of 1st node 
         index2 = SCTR(i, 2); % index of 2nd node
         delx = NODES(index1, 1) - NODES(index2, 1); % get x delta
@@ -37,7 +37,7 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
     %One dimensional case
     if DOF == 1  
         A = [1 -1; -1 1]; % transformation
-        for el = 1:e % each element
+        for el = 1:sctr_size % each element
             KLOCAL = geometric_props(el,1)*A; % get stiffness for this local kmatrix from property matrix
             for i = 1:2
                 for j = 1:2
@@ -51,7 +51,7 @@ function [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL)
 
     %Two dimensional case
     if DOF == 2
-        for el = 1:e
+        for el = 1:sctr_size
            %Keff values
            theta = geometric_props(el, 2); % angle between the local axis and the global axis
            stiffness = geometric_props(el, 1); % stiffness of the current element

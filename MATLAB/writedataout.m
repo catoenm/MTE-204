@@ -32,10 +32,11 @@ end
 
 fprintf(fid2, '%s\n%s\n', char(hFile{1,1}(4,1)), char(hFile{1,1}(5,1))); %print other submission headings
 
-nRows = size(FGLOBAL, 1); %gets number of elements
+num_rows = size(FGLOBAL, 1); %gets number of elements
 
 %nRows should be same for following matrices: 
 %FGLOBAL, UGLOBAL, NODES
+%calculated from student numbers
 fprintf(fid2,'FA = 2630.000000, ');
 fprintf(fid2,'FB = 600.000000\n');
 fprintf(fid2,'FC = 380.000000, ');
@@ -44,7 +45,7 @@ fprintf(fid2,'FD = 3550.000000\n');
 fprintf(fid2, '\n%s\n', char(hFile{1,1}(6,1)));
 
 count = 1;
-for ii = 1:nRows
+for ii = 1:num_rows
     fprintf(fid2,'U');
     %assumes at most 3DOF
     if DOF == 1
@@ -78,7 +79,7 @@ end
 fprintf(fid2, '\n%s\n', char(hFile{1,1}(7,1)));
 
 count = 1;
-for ii = 1:nRows
+for ii = 1:num_rows
     fprintf(fid2,'F');
     %assumes at most 3DOF
     if DOF == 1
@@ -111,11 +112,11 @@ end
 
 fprintf(fid2, '\n%s\n%s\n%s\n', char(hFile{1,1}(8,1)), char(hFile{1,1}(9,1)), char(hFile{1,1}(10,1)));
 
-nRows = size(SCTR,1);
-nCol = size(SCTR,2);
-for ii = 1:nRows 
+num_rows = size(SCTR,1);
+num_columns = size(SCTR,2);
+for ii = 1:num_rows 
     fprintf(fid2,'%d, ',ii); %prints out element number
-    for jj = 1:nCol
+    for jj = 1:num_columns
         fprintf(fid2,'%d, ',SCTR(ii,jj)); %prints out first node, then second node
     end
     fprintf(fid2,'%f ',abs(STRESS(ii))); %print out absolute stress value
