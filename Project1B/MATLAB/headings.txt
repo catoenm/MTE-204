@@ -1,0 +1,10 @@
+///***************************************************
+/// SOLUTIONS TO Problem 1a - 2016
+/// SOLUTIONS TO Problem 1b - 2016
+///***************************************************
+/// Calculated Forces (N)
+/// NODAL POSITIONS (mm)
+/// NODAL FORCES (Newtons)
+/// Element Stresses (MPa)
+/// ID, Node 1, Node 2, STRESS[MPa]
+--------------------------------------------------------
