@@ -48,7 +48,9 @@ clear all;
 % % % Step Four: Matrix Assembly
 % % % ******************************************************
 [KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL);
-
+[CGLOBAL] = buildMGLOBAL(NODES, SCTR, DOF, ;
+[MGLOBAL] = buildCGLOBAL(NODES, SCTR, DOF, ;
+    
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
 % % % ******************************************************

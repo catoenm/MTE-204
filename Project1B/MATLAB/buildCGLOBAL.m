@@ -1,4 +1,4 @@
-function [ output_args ] = buildGlobalDamping( input_args )
+function [ output_args ] = buildCGLOBAL( input_args )
 %buildGlobalDamping
 %   Handle global damping matrix creation
 
