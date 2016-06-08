@@ -59,19 +59,13 @@ clear all;
 [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,size(KGLOBAL,1));
 
 % % % **********************************************************
-% % % Step 6: Solve for Displacements and Forces
+% % % Step 6: Iterate to Solve for Displacements and Forces
 % % % **********************************************************
 [UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE);
+% solve for velocity and acceleration 
 
 % % % **********************************************************
 % % % Step 7: Post Processing
 % % % **********************************************************   
 [STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL);
 writedataout('projectSOLUTIONS_1b.txt',NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
-
-
-
-
-
-
-
