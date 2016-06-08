@@ -42,14 +42,15 @@ clear all;
 % % % *******************************************************
 % % % Step Three: PROCESS MATERIAL INFORMATION
 % % % ******************************************************* 
-[AREA, YOUNG] = process_material_props(PROPS);
+[AREA,YOUNG,DAMPING,MASS] = process_material_props(PROPS);
 
 % % % ******************************************************
 % % % Step Four: Matrix Assembly
 % % % ******************************************************
-[KGLOBAL] = buildKGLOBAL(NODES,SCTR,DOF,YOUNG,AREA,KGLOBAL);
-[CGLOBAL] = buildMGLOBAL(NODES, SCTR, DOF, ;
-[MGLOBAL] = buildCGLOBAL(NODES, SCTR, DOF, ;
+[GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
+[KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
+[CGLOBAL] = buildMGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
+[MGLOBAL] = buildCGLOBAL(MASS,DOF);
     
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
