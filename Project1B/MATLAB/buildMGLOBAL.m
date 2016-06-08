@@ -1,14 +1,13 @@
-function [ output_args ] = buildMGLOBAL(NODES, SCTR)
+function [ MGLOBAL ] = buildMGLOBAL(M, DOF)
 %buildGlobalMass
 %   Handle global mass matrix creation
 
-%Build M locals
+    MGLOBAL = zeros(size(M)*DOF, size(M)*DOF);
 
-
-
-%Insert Into M Global
-
-
-
+    for i = 0:1:size(M)
+        for j = 1:DOF
+            MGLOBAL(i*DOF+j,i*DOF+j) = M(i+1);
+        end
+    end    
+    
 end
-
