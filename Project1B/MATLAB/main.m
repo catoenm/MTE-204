@@ -49,8 +49,8 @@ clear all;
 % % % ******************************************************
 [GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
 [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
-[CGLOBAL] = buildMGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildCGLOBAL(MASS,DOF);
+[CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
+[MGLOBAL] = buildMGLOBAL(MASS,DOF);
     
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
