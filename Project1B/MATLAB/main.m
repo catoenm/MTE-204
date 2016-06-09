@@ -52,7 +52,7 @@ GAMMA = 3/2;
 % % % *******************************************************
 % % % Step Three: PROCESS MATERIAL INFORMATION
 % % % ******************************************************* 
-[AREA,YOUNG,DAMPING,MASS] = process_material_props(PROPS);
+[AREA,YOUNG,DENSITY,DAMPING] = process_material_props(PROPS);
 
 % % % ******************************************************
 % % % Step Four: Matrix Assembly

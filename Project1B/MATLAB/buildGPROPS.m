@@ -4,7 +4,7 @@ function [GPROPS] = buildGPROPS(NODES,SCTR,YOUNG,AREA)
     sctr_size = size(SCTR, 1); % # of elements/rows in SCTR
 
     % initializing in properties matrix
-    GPROPS = zeros(sctr_size, 2); 
+    GPROPS = zeros(sctr_size, 3); 
 
     %Calculating properties
     for i = 1:sctr_size % each element
@@ -22,6 +22,7 @@ function [GPROPS] = buildGPROPS(NODES,SCTR,YOUNG,AREA)
         
         GPROPS(i, 1) = YOUNG(i,1) * AREA(i,1) / length; % E *A / L <= formula to get stiffness of a material
         GPROPS(i, 2) = angle; % add angle to properties
+        GPROPS(i, 3) = length; %add length to properties
     end
 
 end
