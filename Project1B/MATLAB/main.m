@@ -60,7 +60,7 @@ GAMMA = 3/2;
 [GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
 [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
 [CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF, MGLOBAL,GPROPS);
+[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,GPROPS);
     
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
