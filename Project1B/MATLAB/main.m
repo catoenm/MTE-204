@@ -52,7 +52,7 @@ GAMMA = 3/2;
 % % % *******************************************************
 % % % Step Three: PROCESS MATERIAL INFORMATION
 % % % ******************************************************* 
-[AREA,YOUNG,DAMPING,MASS] = process_material_props(PROPS);
+[AREA, YOUNG, DAMPING, DENSITY] = process_material_props(PROPS);
 
 % % % ******************************************************
 % % % Step Four: Matrix Assembly
@@ -60,7 +60,7 @@ GAMMA = 3/2;
 [GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
 [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
 [CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildMGLOBAL(MASS,DOF, MGLOBAL);
+[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF, MGLOBAL,GPROPS);
     
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
