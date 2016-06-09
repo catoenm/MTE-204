@@ -42,7 +42,7 @@ GAMMA = 3/2;
                'Input_Files/nodes_1',...
                'Input_Files/sctr_1',...
                'Input_Files/props_1',...
-               'Input_Files/load_1_100ms.txt');
+               'Input_Files/load_1_100ms');
            
 numNodes = size(NODES,1);
 DOF = size(NODES, 2);
@@ -94,5 +94,3 @@ for i = 1:(length(LOAD_CURVE) - 3)
     end
     UGLOBAL = NEXTUGLOBAL;
 end
-
-postprocessor()
