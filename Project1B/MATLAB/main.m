@@ -60,7 +60,7 @@ GAMMA = 3/2;
 [GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
 [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
 [CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildMGLOBAL(MASS,DOF, MGLOBAL);
+[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,GPROPS);
     
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
@@ -71,7 +71,7 @@ GAMMA = 3/2;
 % % % Step 6: Iterate to Solve for Displacements and Forces
 % % % **********************************************************
 
-for (i = 1:length(LOAD_CURVE))
+for i = 1:length(LOAD_CURVE)
 
     % Update FGLOBAL based on load curve
     CURR_LOAD = LOAD_CURVE(i,:);
