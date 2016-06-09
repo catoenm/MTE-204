@@ -1,6 +1,10 @@
 function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
          FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
          FIXED, FREE, OPTION, TIME, BETA, GAMMA)
+    
+    % % % Free = Known forces e.g.[1,3,6]
+    % % % Fixed = Known displacements e.g.[2,4,5]
+     
     % Options:
     % 1 - Implicit, no damping
     % 2 - Implicit, with damping
