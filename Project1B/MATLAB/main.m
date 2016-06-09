@@ -94,3 +94,5 @@ for i = 1:(length(LOAD_CURVE) - 3)
     end
     UGLOBAL = NEXTUGLOBAL;
 end
+
+postprocessor()
