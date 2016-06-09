@@ -1,4 +1,4 @@
-function [ MGLOBAL ] = buildMGLOBAL(M, DOF)
+function [ MGLOBAL ] = buildMGLOBAL(M, DOF, MGLOBAL)
 %buildGlobalMass
 %   Handle global mass matrix creation
 
