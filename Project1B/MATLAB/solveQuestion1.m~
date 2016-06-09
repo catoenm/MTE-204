@@ -1,0 +1,13 @@
+clc
+clear all
+close all
+
+loadCurves = 'Input_Files/Question1/curves';
+loadCurveNames = dir(loadCurves);
+props = 'Input_Files/Question1/props_1.txt';
+nodes = 'Input_Files/Question1/nodes_1.txt';
+sctr = 'Input_Files/Question1/sctr_1.txt';
+
+for i = 1:length(loadcurves.names)
+    runSimulation((nodes, sctr, props, strcat(loadCurves, loadCurveNames.names(i))
+end
