@@ -1,4 +1,4 @@
-function [GPROPS] = buildGPROPS(NODES,SCTR,DOF,YOUNG,AREA)
+function [GPROPS] = buildGPROPS(NODES,DOF,YOUNG,AREA,SCTR)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     sctr_size = size(SCTR, 1); % # of elements/rows in SCTR

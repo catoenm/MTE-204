@@ -10,8 +10,8 @@ function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration )
         if loadCurve(1,i) == 1
             fGlobal(index) = loadCurve(iteration + 3,i);
         else
-            uGlobal(index) = loadCurve(iteration + 3,i);
+            uGlobal(index) = loadCurve(iteration + 3,1);
         end
     end
-    
+
 end

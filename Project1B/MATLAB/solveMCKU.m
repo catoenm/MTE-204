@@ -1,5 +1,5 @@
-function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
-         FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
+function [ NEXTUGLOBAL, NEXTFGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
+         NEXTFGLOBAL, NEXTUGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
          FIXED, FREE, OPTION, TIME, BETA, GAMMA)
     
     % % % Free = Known forces e.g.[1,3,6]
@@ -52,13 +52,13 @@ function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,...
     for i = 1:n 
         if(ismember(i,FREE)) % if the index is one where a force is known,...
             A_temp(f_next,:) = A(i,:); % copy row into next available row below m
-            F_temp(f_next,:) = FGLOBAL(i,:); % copy F element into next available spot below m
+            F_temp(f_next,:) = NEXTFGLOBAL(i,:); % copy F element into next available spot below m
             X_temp(f_next,:) = X(i,:); % copy X element into next available spot below m
             f_order(i) = f_next; % store where i was swapped to
             f_next = f_next + 1; % increment tracker to indicate one less spot
         else
             A_temp(e_next,:) = A(i,:); % copy row into next available row from the top to m
-            F_temp(e_next,:) = FGLOBAL(i,:); % copy F element into next available spot from top to m
+            F_temp(e_next,:) = NEXTFGLOBAL(i,:); % copy F element into next available spot from top to m
             X_temp(e_next,:) = X(i,:); % copy X element into next available spot from top to m
             f_order(i) = e_next; % " "
             e_next = e_next + 1; % " "
@@ -73,12 +73,12 @@ function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,...
     for i = 1:n % This is all the same as the rowswap for-loop, but now columns are swapped instead of rows
         if(ismember(i,FIXED)) 
             A_temp2(:,e_next) = A_temp(:,i);
-            U_temp(e_next,:) = UGLOBAL(i,:);
+            U_temp(e_next,:) = NEXTUGLOBAL(i,:);
             u_order(i) = e_next;
             e_next = e_next + 1;
         else
             A_temp2(:,f_next) = A_temp(:,i);
-            U_temp(f_next,:) = UGLOBAL(i,:);
+            U_temp(f_next,:) = NEXTUGLOBAL(i,:);
             u_order(i) = f_next;
             f_next = f_next + 1;
         end
@@ -102,7 +102,7 @@ function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,...
 
     F_temp = A_temp2 * U_temp - X_temp; % solve via matrix multiplication (Godbless MATLAB)
     
-    FGLOBAL = F_temp(f_order); % revert to original ordering  
+    NEXTFGLOBAL = F_temp(f_order); % revert to original ordering  
     NEXTUGLOBAL = U_temp(u_order); % " "
 
 end

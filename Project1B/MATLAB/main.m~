@@ -28,7 +28,7 @@ clear all;
     % 2 - Implicit, with damping
     % 3 - Explicit, no damping
     % 4 - Explicit, with damping
-OPTION = 3;
+OPTION = 4;
 
 % Constants for Implicit Formulation
 BETA = 8/5;
@@ -47,8 +47,10 @@ GAMMA = 3/2;
 numNodes = size(NODES,1);
 [DOF] = get_DOF(NODES);
 TIME = LOAD_CURVE(5,1) - LOAD_CURVE(4,1);
-[FI,FIXED] = buildFixedFree(DOF, numNodes, LOAD_CURVE)
-[KGLOBAL,FGLOBAL,UGLOBAL,MGLOBAL,CGLOBAL] = initialize_matrices(DOF,numNodes);
+[FIXED,FREE] = buildFixedFree(DOF, numNodes, LOAD_CURVE);
+KGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
+CGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
+MGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
 
 % % % *******************************************************
 % % % Step Three: PROCESS MATERIAL INFORMATION
@@ -58,17 +60,16 @@ TIME = LOAD_CURVE(5,1) - LOAD_CURVE(4,1);
 % % % ******************************************************
 % % % Step Four: Matrix Assembly
 % % % ******************************************************
-[GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
-[KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
-[CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,GPROPS);
+[GPROPS]  = buildGPROPS (NODES,DOF,AREA,YOUNG,SCTR);
+[KGLOBAL] = buildKGLOBAL(DOF,KGLOBAL,SCTR,GPROPS);
+[CGLOBAL] = buildCGLOBAL(DAMPING,DOF,CGLOBAL,SCTR,GPROPS);
+[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,MGLOBAL,SCTR,GPROPS);
 
 % Set initial acceleration, velocity and prev displacement to 0
-UDOTGLOBAL = zeros(numNodes*DOF,1);
-UDDOTGLOBAL = UDOTGLOBAL; 
-PREVUGLOBAL = UDOTGLOBAL;
-PREVUDOTGLOBAL = UDOTGLOBAL;
-PREVUDDOTGLOBAL = UDOTGLOBAL;
+UGLOBAL = zeros(numNodes*DOF,1);
+UDOTGLOBAL = UGLOBAL;
+UDDOTGLOBAL = UGLOBAL; 
+PREVUGLOBAL = UGLOBAL;
 
 % % % **********************************************************
 % % % Step 6: Iterate to Solve for Displacements and Forces
@@ -76,22 +77,20 @@ PREVUDDOTGLOBAL = UDOTGLOBAL;
 
 for i = 1:(length(LOAD_CURVE) - 3)
     
-    [UGLOBAL,FGLOBAL] = getBCs(numNodes, DOF, LOAD_CURVE, i);
+    [NEXTUGLOBAL,NEXTFGLOBAL] = getBCs(numNodes, DOF, LOAD_CURVE, i);
     
     % Calculate next UGLOBAL and FGLOBAL
-    [UGLOBAL,FGLOBAL] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
-             FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
+    [NEXTUGLOBAL,NEXTFGLOBAL] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
+             NEXTFGLOBAL, NEXTUGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
              FIXED, FREE, OPTION, TIME, BETA, GAMMA);
  
 
     % If implicit, update velocity and acceleration
     if OPTION <= 2
-        [UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(UGLOBAL, PREVUGLOBAL, PREVUDOTGLOBAL,...
-            PREVUDDOTGLOBAL, BETA, GAMMA, TIME);
-        PREVUDOTGLOBAL = UDOTGLOBAL;
-        PREVUDDOTGLOBAL = UDDOTGLOBAL;
+        [UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(UGLOBAL, PREVUGLOBAL, UDOTGLOBAL,...
+            UDDOTGLOBAL, BETA, GAMMA, TIME);
+    else
+        PREVUGLOBAL = UGLOBAL;
     end
-    
-    % Increment U matricies 
-    UPREVGLOBAL = UGLOBAL;
+    UGLOBAL = NEXTUGLOBAL;
 end

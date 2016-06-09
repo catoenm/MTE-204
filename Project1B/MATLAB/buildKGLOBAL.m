@@ -1,4 +1,4 @@
-function [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS)
+function [KGLOBAL] = buildKGLOBAL(DOF,KGLOBAL,SCTR,GPROPS)
 
 
     % % % This function receives the node list, the elemental connectivity
