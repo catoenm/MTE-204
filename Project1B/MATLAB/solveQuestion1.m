@@ -12,20 +12,88 @@ props = 'Input_Files/Question1/props_1.txt';
 nodes = 'Input_Files/Question1/nodes_1.txt';
 sctr = 'Input_Files/Question1/sctr_1.txt';
 
-option = 2;
+% Options
+% 1 - Implicit, no damping
+% 2 - Implicit, with damping
+% 3 - Explicit, no damping
+% 4 - Explicit, with damping
+
+% *************************************************************************
+% Question 1a
+% *************************************************************************
+
+option = 4;
 
 for i = 1:length(loadCurveFiles)
-    results(i).option = option;
-    results(i).timeStep = loadCurveFiles(i).name(8:end);
-    [results(i).uGlobal, results(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
+    explicitResults(i).option = option;
+    timeSteps{i} = loadCurveFiles(i).name(8:end-4);
+    [explicitResults(1).uGlobal, explicitResults(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
+    explicitNode2Disp(1,i) = explicitResults(1).uGlobal(2);
 end
+
+figure
+hold on
+bar(explicitNode2Disp, 'r','DisplayName','Explicit Dynamics');
+set(gca, 'XTick', 1:4, 'XTickLabel', timeSteps);
+legend('show');
+title('Question 1a: Displacement of Node 2 after 5 Seconds');
+ylim([0 1]);
+xlabel('\Delta t');
+ylabel('Displacement (m)');
+
+% *************************************************************************
+% Question 1b
+% *************************************************************************
+
+option = 2;
 
 figure;
 hold on;
-for i = 1:length(results)
-    plot(i,results(i).uGlobal(2), strcat(colorSpec(i),symbolSpec(i)),'DisplayName',results(i).timeStep);
+for i = 1:length(loadCurveFiles)
+    timeSteps{i} = loadCurveFiles(i).name(8:end-4);
+    [implicitResults(1).uGlobal, implicitResults(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
+    implicitNode2Disp(1,i) = implicitResults(1).uGlobal(2);
 end
 
+bar(implicitNode2Disp,'b','DisplayName','Implicit Dynamics');
+set(gca, 'XTick', 1:4, 'XTickLabel', timeSteps);
 legend('show');
-title('Question 1: Displacement of Node 2 Using Explict Dynamics');
+title('Question 1b: Displacement of Node 2 after 5 Seconds');
+ylim([0 1]);
+xlabel('\Delta t');
+ylabel('Displacement (m)');
 
+% *************************************************************************
+% Question 1c
+% *************************************************************************
+
+k = 
+m = 
+c =
+F =
+omegaN = sqrt(k/m);
+zeta = c/(2*m*omegaN);
+omegaD = omegaN*sqrt(1-zeta^2);
+theta = arctan(zeta/qrt(1-zeta^2));
+firstTerm = F/k;
+secondTerm = F/
+
+% *************************************************************************
+% Question 1d
+% *************************************************************************
+
+disp('Question 1D:')
+disp('Global Forces (Implicit)')
+
+for i = 1:length(loadCurveFiles)
+    disp(timeSteps{i})
+    disp(implicitResults(i).fGlobal)
+end
+
+
+disp('Global Forces (Explicit)')
+
+for i = 1:length(loadCurveFiles)
+    disp(timeSteps{i})
+    disp(explicitResults(i).fGlobal)
+end
