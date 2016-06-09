@@ -28,7 +28,7 @@ clear all;
     % 2 - Implicit, with damping
     % 3 - Explicit, no damping
     % 4 - Explicit, with damping
-OPTION = 4;
+OPTION = 1;
 
 % Constants for Implicit Formulation
 BETA = 8/5;
@@ -45,7 +45,7 @@ GAMMA = 3/2;
                'Input_Files/load_1_100ms.txt');
            
 numNodes = size(NODES,1);
-[DOF] = get_DOF(NODES);
+DOF = size(NODES, 2);
 TIME = LOAD_CURVE(5,1) - LOAD_CURVE(4,1);
 [FIXED,FREE] = buildFixedFree(DOF, numNodes, LOAD_CURVE);
 KGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
@@ -87,7 +87,7 @@ for i = 1:(length(LOAD_CURVE) - 3)
 
     % If implicit, update velocity and acceleration
     if OPTION <= 2
-        [UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(UGLOBAL, PREVUGLOBAL, UDOTGLOBAL,...
+        [UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(NEXTUGLOBAL, UGLOBAL, UDOTGLOBAL,...
             UDDOTGLOBAL, BETA, GAMMA, TIME);
     else
         PREVUGLOBAL = UGLOBAL;
