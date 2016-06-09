@@ -93,7 +93,7 @@ function [ nextUGlobal, fGlobal ] = solveMCKU( kGlobal, mGlobal, cGlobal,...
     
     % use LU decomposition to find solution for 
     % [Kf][Uf] = [Ff]-[Kfe]*[Ue] + [Xf] 
-    Uf = LU_decomp(Kf,Ff-Kfe*Ue + Xf);
+    Uf = luDecomp(Kf,Ff-Kfe*Ue + Xf);
     U_temp(m+1:n) = Uf; % Add these solved variables back to U vector
 
     F_temp = A_temp2 * U_temp - X_temp; % solve via matrix multiplication (Godbless MATLAB)

@@ -69,7 +69,7 @@ time = load_curve(5,1) - load_curve(4,1);
 for (i = 1:length(load_curve))
 
     % Update FGLOBAL or UGLOBAl based on load curve
-    
+    [uGlobal,fGlobal] = buildBCs(load_curve);
     
     % Calculate next UGLOBAL and FGLOBAL
     [uGlobal,fGlobal] = solveMCKU( kGlobal, mGlobal, cGlobal,... 
