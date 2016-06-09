@@ -38,15 +38,15 @@ GAMMA = 3/2;
 % % % Step One: Input Information, determine DOF, and initialize
 % % % **********************************************
 
-[NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES,LOAD_CURVE] = open_files(...
+[NODES,SCTR,PROPS,LOAD_CURVE] = open_files(...
                'question2Input/nodes2.txt',...
                'question2Input/sctr2.txt',...
                'question2Input/props2.txt',...
-               'question2Input/nodeBCs2.txt',...
-               'question2Input/nodeFORCES2.txt',...
                'question2Input/loadCURVE2.txt');
 
 [DOF] = get_DOF(NODES);
+TIME = LOAD_CURVE(5,1) - LOAD_CURVE(4,1);
+[FREE,FIXED] = buildFixedFree(DOF, size(NODES,1), LOAD_CURVE);
 [KGLOBAL,FGLOBAL,UGLOBAL,MGLOBAL,CGLOBAL] = initialize_matrices(DOF,size(NODES,1));
 
 % % % *******************************************************
@@ -61,31 +61,25 @@ GAMMA = 3/2;
 [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
 [CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
 [MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,GPROPS);
-    
-% % % ******************************************************
-% % % Step Five: Boundary Conditions
-% % % ******************************************************
-[UGLOBAL,FIXED] = buildNODEBCs(UGLOBAL,NODAL_BCS,DOF);
+
 
 % % % **********************************************************
 % % % Step 6: Iterate to Solve for Displacements and Forces
 % % % **********************************************************
 
 for i = 1:length(LOAD_CURVE)
-
-    % Update FGLOBAL based on load curve
-    CURR_LOAD = LOAD_CURVE(i,:);
-    [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,CURR_LOAD,DOF,size(KGLOBAL,1));
+    
+    [UGLOBAL,FGLOBAL] = getBCs(size(NODES,1), DOF, TIME);
     
     % Calculate next UGLOBAL and FGLOBAL
     [UGLOBAL,FGLOBAL] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
              FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
              FIXED, FREE, OPTION, TIME, BETA, GAMMA);
-
+ 
     % Incrament U matricies 
     UPREVGLOBAL = UGLOBAL;
     % If implicit, update velocity and acceleration
-    if OPTION > 2
+    if OPTION <= 2
         [UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(UGLOBAL, PREVUGLOBAL, PREVUDOTGLOBAL,...
             PREVUDDOTGLOBAL, BETA, GAMMA, TIME);
         PREVUDOTGLOBAL = UDOTGLOBAL;

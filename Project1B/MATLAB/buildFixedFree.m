@@ -1,9 +1,7 @@
-function [ FIXED, FREE ] = buildFixedFree( DOF, numNodes )
+function [ FIXED, FREE ] = buildFixedFree( DOF, numNodes, loadCurve )
     %UNTITLED Summary of this function goes here
     %   Detailed explanation goes here
-
-    [loadCurve] = open_files('load_curve.txt');
-    %load curve = (3 + # time increments)x n
+ 
     
     for i = 2:size(loadCurve, 2)
         if loadCurve(1,i) == 0

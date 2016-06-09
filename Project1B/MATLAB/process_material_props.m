@@ -1,4 +1,4 @@
-function [AREA, YOUNG, DAMPING, DENSITY] = process_material_props(PROPS)
+function [AREA, YOUNG, DENSITY, DAMPING] = process_material_props(PROPS)
 % % % This function receives the material properties matrix
 % % % This function partitions and returns the area and elastic modulus
 
