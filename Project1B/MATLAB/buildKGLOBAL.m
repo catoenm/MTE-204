@@ -13,6 +13,8 @@ function [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS)
 
     %GPROPS INPUTTED
 
+    sctr_size = size(SCTR,1);
+    
     %One dimensional case
     if DOF == 1  
         A = [1 -1; -1 1]; % transformation
@@ -63,12 +65,5 @@ function [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS)
                end
            end
         end
-    end
-
-    %Three dimensional case
-    if DOF == 3 % 
-      
-         %To be filled in when needed
-
     end
 end

@@ -47,7 +47,7 @@ GAMMA = 3/2;
 numNodes = size(NODES,1);
 [DOF] = get_DOF(NODES);
 TIME = LOAD_CURVE(5,1) - LOAD_CURVE(4,1);
-[FIXED,FREE] = buildFixedFree(DOF, numNodes, LOAD_CURVE);
+[FI,FIXED] = buildFixedFree(DOF, numNodes, LOAD_CURVE)
 [KGLOBAL,FGLOBAL,UGLOBAL,MGLOBAL,CGLOBAL] = initialize_matrices(DOF,numNodes);
 
 % % % *******************************************************
@@ -59,9 +59,9 @@ TIME = LOAD_CURVE(5,1) - LOAD_CURVE(4,1);
 % % % Step Four: Matrix Assembly
 % % % ******************************************************
 [GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
-[KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS)
-[CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS)
-[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,GPROPS)
+[KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
+[CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
+[MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,GPROPS);
 
 % Set initial acceleration, velocity and prev displacement to 0
 UDOTGLOBAL = zeros(numNodes*DOF,1);

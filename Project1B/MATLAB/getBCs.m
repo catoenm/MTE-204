@@ -1,4 +1,4 @@
-function [ fGlobal, uGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration )
+function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration )
 %GETBCS Summary of this function goes here
 %   Detailed explanation goes here
 

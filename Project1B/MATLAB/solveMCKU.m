@@ -26,8 +26,7 @@ function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,...
         B = KGLOBAL - 2.*MGLOBAL./(TIME^2);
         D = MGLOBAL./(TIME^2) - CGLOBAL/(2*TIME);
         %add a dummy variable
-        X = -B*UGLOBAL - D*PREVUGLOBAL;
-        
+        X = -B*UGLOBAL - D*PREVUGLOBAL;  
     else
     %IMPLICIT
         %calculate A,B,C,D 
@@ -37,7 +36,8 @@ function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,...
         D = ((1 - BETA)/BETA).*MGLOBAL + ((GAMMA - 1) + ((1 - BETA)/BETA)*GAMMA)*TIME.*CGLOBAL;
         %add a dummy variable
         X = B*UGLOBAL + C*UDOTGLOBAL + D*UDDOTGLOBAL;
-    
+    end
+        
     % these vectors will track what the original ordering of the elements
     % of F/U matrices are
     f_order = zeros(1,n); 
@@ -104,8 +104,6 @@ function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,...
     
     FGLOBAL = F_temp(f_order); % revert to original ordering  
     NEXTUGLOBAL = U_temp(u_order); % " "
-    
 
-    
 end
 

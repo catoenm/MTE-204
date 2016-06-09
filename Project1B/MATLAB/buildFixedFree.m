@@ -2,10 +2,9 @@ function [ FIXED, FREE ] = buildFixedFree( DOF, numNodes, loadCurve )
     %UNTITLED Summary of this function goes here
     %   Detailed explanation goes here
  
-    
     for i = 2:size(loadCurve, 2)
         if loadCurve(1,i) == 0
-            FIXED(i) = loadCurve(2,i)*DOF + loadCurve(3,i) - DOF;
+            FIXED(i-1) = loadCurve(2,i)*DOF + loadCurve(3,i) - DOF;
         end
     end
 

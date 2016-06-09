@@ -2,6 +2,8 @@ function [ CGLOBAL ] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS)
     %buildGlobalDamping
     %   Handle global damping matrix creation
     
+    sctr_size = size(SCTR,1);
+    
     %One dimensional case
     if DOF == 1  
         A = [1 -1; -1 1]; % transformation
@@ -51,11 +53,6 @@ function [ CGLOBAL ] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS)
                end
            end
         end
-    end
-
-    %Three dimensional case
-    if DOF == 3 % 
-         %To be filled in when needed
     end
 end
 

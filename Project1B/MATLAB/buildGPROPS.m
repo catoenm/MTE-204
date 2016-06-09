@@ -1,4 +1,4 @@
-function [GPROPS] = buildGPROPS(NODES,SCTR,YOUNG,AREA)
+function [GPROPS] = buildGPROPS(NODES,SCTR,DOF,YOUNG,AREA)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     sctr_size = size(SCTR, 1); % # of elements/rows in SCTR
@@ -16,7 +16,7 @@ function [GPROPS] = buildGPROPS(NODES,SCTR,YOUNG,AREA)
             length = sqrt((delx)^2 + (dely)^2); % calculate pythagorean length
             angle  = atan(dely/delx); % calculate angle
         else 
-            length = delx; 
+            length = abs(delx); 
             angle = 0; 
         end
         
