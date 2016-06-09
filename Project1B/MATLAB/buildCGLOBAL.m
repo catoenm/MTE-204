@@ -1,4 +1,4 @@
-function [ CGLOBAL ] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS)
+function [ CGLOBAL ] = buildCGlobal(DAMPING,SCTR,DOF,CGLOBAL,GPROPS)
     %buildGlobalDamping
     %   Handle global damping matrix creation
     

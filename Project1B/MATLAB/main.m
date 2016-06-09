@@ -28,68 +28,62 @@ clear all;
     % 2 - Implicit, with damping
     % 3 - Explicit, no damping
     % 4 - Explicit, with damping
-OPTION = 1;
+option = 1;
 
 % Constants for Implicit Formulation
-BETA = 8/5;
-GAMMA = 3/2;
+beta = 8/5;
+gamma = 3/2;
 
 % % % **********************************************
 % % % Step One: Input Information, determine DOF, and initialize
 % % % **********************************************
 
-[NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES,LOAD_CURVE] = open_files(...
-               'question2Input/nodes2.txt',...
-               'question2Input/sctr2.txt',...
-               'question2Input/props2.txt',...
-               'question2Input/nodeBCs2.txt',...
-               'question2Input/nodeFORCES2.txt',...
-               'question2Input/loadCURVE2.txt');
+[nodes,sctr,props,load_curve] = open_files(...
+               'question2Input/nodes.txt',...
+               'question2Input/sctr.txt',...
+               'question2Input/props.txt',...
+               'question2Input/loadCurve.txt');
 
-[DOF] = get_DOF(NODES);
-[KGLOBAL,FGLOBAL,UGLOBAL,MGLOBAL,CGLOBAL] = initialize_matrices(DOF,size(NODES,1));
+[dof] = get_DOF(nodes);
+[kGlobal,fGlobal,uGlobal,mGlobal,cGlobal] = initialize_matrices(dof,size(nodes,1));
+[free, fixed] = build_fixed_free(load_curve);
+time = load_curve(5,1) - load_curve(4,1);
 
 % % % *******************************************************
 % % % Step Three: PROCESS MATERIAL INFORMATION
 % % % ******************************************************* 
-[AREA,YOUNG,DAMPING,MASS] = process_material_props(PROPS);
+[area,young,damping,mass] = process_material_props(props);
 
 % % % ******************************************************
 % % % Step Four: Matrix Assembly
 % % % ******************************************************
-[GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
-[KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
-[CGLOBAL] = buildCGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildMGLOBAL(MASS,DOF, MGLOBAL);
-    
-% % % ******************************************************
-% % % Step Five: Boundary Conditions
-% % % ******************************************************
-[UGLOBAL,FIXED] = buildNODEBCs(UGLOBAL,NODAL_BCS,DOF);
+[globalProps]  = buildGlobalProps (nodes,sctr,dof,area,young);
+[kGlobal] = buildKGlobal(sctr,dof,kGlobal,globalProps);
+[cGlobal] = buildCGlobal(damping,sctr,dof,cGlobal,globalProps);
+[mGlobal] = buildMGlobal(mass,dof,mGlobal);
 
 % % % **********************************************************
 % % % Step 6: Iterate to Solve for Displacements and Forces
 % % % **********************************************************
 
-for (i = 1:length(LOAD_CURVE))
+for (i = 1:length(load_curve))
 
-    % Update FGLOBAL based on load curve
-    CURR_LOAD = LOAD_CURVE(i,:);
-    [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,CURR_LOAD,DOF,size(KGLOBAL,1));
+    % Update FGLOBAL or UGLOBAl based on load curve
+    
     
     % Calculate next UGLOBAL and FGLOBAL
-    [UGLOBAL,FGLOBAL] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
-             FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
-             FIXED, FREE, OPTION, TIME, BETA, GAMMA);
+    [uGlobal,fGlobal] = solveMCKU( kGlobal, mGlobal, cGlobal,... 
+             fGlobal, uGlobal, uDotGlobal , uDDotGlobal, prevUglobal,...
+             fixed, free, option, time, beta, gamma);
 
     % Incrament U matricies 
-    UPREVGLOBAL = UGLOBAL;
+    prevUglobal = uGlobal;
     % If implicit, update velocity and acceleration
-    if OPTION > 2
-        [UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(UGLOBAL, PREVUGLOBAL, PREVUDOTGLOBAL,...
-            PREVUDDOTGLOBAL, BETA, GAMMA, TIME);
-        PREVUDOTGLOBAL = UDOTGLOBAL;
-        PREVUDDOTGLOBAL = UDDOTGLOBAL;
+    if option <= 2
+        [uGlobal, uDotGlobal, uDDotGlobal] = update_implicit(uGlobal, prevUglobal, prevUDotGlobal,...
+            prevUDDotGlobal, beta, gamma, time);
+        prevUDotGlobal = uDotGlobal;
+        prevUDDotGlobal = uDDotGlobal;
     end
 
 end
@@ -97,5 +91,5 @@ end
 % % % **********************************************************
 % % % Step 7: Post Processing
 % % % **********************************************************   
-[STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL);
-writedataout('projectSOLUTIONS_1b.txt',NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
+[stress] = getSTRESS(sctr,nodes,young,dof,uGlobal);
+

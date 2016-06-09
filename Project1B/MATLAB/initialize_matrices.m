@@ -1,4 +1,4 @@
-function [KGLOBAL,FGLOBAL,UGLOBAL, MGLOBAL, CGLOBAL] = initialize_matrices(DOF,N)
+function [KGLOBAL,FGLOBAL,UGLOBAL, MGLOBAL, CGLOBAL] = initializeMatrices(DOF,N)
 
 % % % This function receives the degree of freedom and number of nodes.
 % % % The function returns an initilized Kglobal, Fglobal, Uglobal,

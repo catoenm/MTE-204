@@ -1,4 +1,4 @@
-function x = LU_decomp(A,b)
+function x = luDecomp(A,b)
     
     % Initialize L and U
     n = size(A,1);

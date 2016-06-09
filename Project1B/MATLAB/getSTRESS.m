@@ -1,4 +1,4 @@
-function [STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL)
+function [STRESS] = getStress(SCTR,NODES,YOUNG,DOF,UGLOBAL)
 
     % % % This function returns the stress in a spring/bar element
     % % % This function receives the elemental connectivity matrix, nodal
