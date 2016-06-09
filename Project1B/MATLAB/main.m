@@ -37,7 +37,7 @@ clear all;
                'question2Input/nodeFORCES2.txt');
 
 [DOF] = get_DOF(NODES);
-[KGLOBAL,FGLOBAL,UGLOBAL] = initialize_matrices(DOF,size(NODES,1));
+[KGLOBAL,FGLOBAL,UGLOBAL,MGLOBAL,CGLOBAL] = initialize_matrices(DOF,size(NODES,1));
 
 % % % *******************************************************
 % % % Step Three: PROCESS MATERIAL INFORMATION
@@ -50,7 +50,7 @@ clear all;
 [GPROPS]  = buildGPROPS (NODES,SCTR,DOF,AREA,YOUNG);
 [KGLOBAL] = buildKGLOBAL(SCTR,DOF,KGLOBAL,GPROPS);
 [CGLOBAL] = buildMGLOBAL(DAMPING,SCTR,DOF,CGLOBAL,GPROPS);
-[MGLOBAL] = buildCGLOBAL(MASS,DOF);
+[MGLOBAL] = buildCGLOBAL(MASS,DOF, MGLOBAL);
     
 % % % ******************************************************
 % % % Step Five: Boundary Conditions
