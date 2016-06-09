@@ -20,21 +20,31 @@ clear all;
 
 
 % % % **********************************************
+% % % Configure Options
+% % % **********************************************
+  
+% Options:
+    % 1 - Implicit, no damping
+    % 2 - Implicit, with damping
+    % 3 - Explicit, no damping
+    % 4 - Explicit, with damping
+OPTION = 1;
+
+% Constants for Implicit Formulation
+BETA = 8/5;
+GAMMA = 3/2;
+
+% % % **********************************************
 % % % Step One: Input Information, determine DOF, and initialize
 % % % **********************************************
-% [NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES] = open_files(...
-%                'question1Input/nodes1.txt',...
-%                'question1Input/sctr1.txt',...
-%                'question1Input/props1.txt',...
-%                'question1Input/nodeBCs1.txt',...
-%                'question1Input/nodeFORCES1.txt');
 
-[NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES] = open_files(...
+[NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES,LOAD_CURVE] = open_files(...
                'question2Input/nodes2.txt',...
                'question2Input/sctr2.txt',...
                'question2Input/props2.txt',...
                'question2Input/nodeBCs2.txt',...
-               'question2Input/nodeFORCES2.txt');
+               'question2Input/nodeFORCES2.txt',...
+               'question2Input/loadCURVE2.txt');
 
 [DOF] = get_DOF(NODES);
 [KGLOBAL,FGLOBAL,UGLOBAL,MGLOBAL,CGLOBAL] = initialize_matrices(DOF,size(NODES,1));
@@ -56,13 +66,33 @@ clear all;
 % % % Step Five: Boundary Conditions
 % % % ******************************************************
 [UGLOBAL,FIXED] = buildNODEBCs(UGLOBAL,NODAL_BCS,DOF);
-[FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,size(KGLOBAL,1));
 
 % % % **********************************************************
 % % % Step 6: Iterate to Solve for Displacements and Forces
 % % % **********************************************************
-[UGLOBAL,FGLOBAL] = solveKU(KGLOBAL,FGLOBAL,UGLOBAL,FIXED,FREE);
-% solve for velocity and acceleration 
+
+for (i = 1:length(LOAD_CURVE))
+
+    % Update FGLOBAL based on load curve
+    CURR_LOAD = LOAD_CURVE(i,:);
+    [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,CURR_LOAD,DOF,size(KGLOBAL,1));
+    
+    % Calculate next UGLOBAL and FGLOBAL
+    [UGLOBAL,FGLOBAL] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
+             FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
+             FIXED, FREE, OPTION, TIME, BETA, GAMMA);
+
+    % Incrament U matricies 
+    UPREVGLOBAL = UGLOBAL;
+    % If implicit, update velocity and acceleration
+    if OPTION > 2
+        [UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL] = update_implicit(UGLOBAL, PREVUGLOBAL, PREVUDOTGLOBAL,...
+            PREVUDDOTGLOBAL, BETA, GAMMA, TIME);
+        PREVUDOTGLOBAL = UDOTGLOBAL;
+        PREVUDDOTGLOBAL = UDDOTGLOBAL;
+    end
+
+end
 
 % % % **********************************************************
 % % % Step 7: Post Processing

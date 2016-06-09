@@ -1,24 +1,22 @@
 function [ NEXTUGLOBAL, FGLOBAL ] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 
          FGLOBAL, UGLOBAL, UDOTGLOBAL, UDDOTGLOBAL, PREVUGLOBAL,...
-         FIXED, FREE, OPTION, TIME )
+         FIXED, FREE, OPTION, TIME, BETA, GAMMA)
     % Options:
     % 1 - Implicit, no damping
     % 2 - Implicit, with damping
     % 3 - Explicit, no damping
     % 4 - Explicit, with damping
-    BETA = 8/5;
-    GAMMA = 3/2;
      
     n = length(KGLOBAL); % matrix is nxn
     m = length(FIXED);  % for mixed method, matrix will be split 1:m, m+1:n   
     
     if( mod(OPTION,2) )
-    %NO DAMPING
+    % NO DAMPING
         CGLOBAL = 0.*CGLOBAL;
     end
 
     if(OPTION > 2)
-    %EXPLICIT
+    % EXPLICIT
         %calculate A,B,D
         A = MGLOBAL./(TIME^2) + CGLOBAL./(2*TIME);
         B = KGLOBAL - 2.*MGLOBAL./(TIME^2);

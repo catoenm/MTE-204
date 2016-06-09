@@ -1,4 +1,4 @@
-function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
+function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,LOAD_CURVE,FIXED,DOF,N)
 
 % % % This function receives the initialized global force matrix,
 % % % list of nodes that have applied force, list nodal boundary conditions
@@ -27,7 +27,10 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
 
     FREE = zeros((N)-size(FIXED,1),1);
     
-    % NODAL_FORCES contains info on nodal forces in the row form [NODE, AXIS, VALUE]
+    % NODAL_FORCES contains info on nodal forces in the row form [NODE, AXIS]
+    % LOAD_CURVE contains the magnitude of the forces in NODAL_FORCES
+    % The N'th row in the NODAL_FORCES matrix corresponds to column N+1 in the
+    % LOAD_CURVE matrix
 
     counter = 1;
     for a = 1 : N % FOR RANGE OF N
@@ -41,7 +44,7 @@ function [FGLOBAL,FREE] = buildFORCEBCs(FGLOBAL,NODAL_FORCES,FIXED,DOF,N)
     
     for b = 1 : size(NODAL_FORCES,1) % FOR 
         force_index = NODAL_FORCES(b,1) * DOF + (NODAL_FORCES(b,2) - DOF);
-        FGLOBAL(force_index) = NODAL_FORCES(b,3); % adds nodal force to corresponding index in global force matrix
+        FGLOBAL(force_index) = LOAD_CURVE(1+NODAL_FORCES(b,2)); % adds nodal force to corresponding index in global force matrix
     end
     
 end
