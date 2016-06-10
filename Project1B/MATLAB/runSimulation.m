@@ -73,7 +73,7 @@ function [NEXTUGLOBAL, NEXTFGLOBAL, UGLOBALCOMPLETE] = runSimulation(nodesFile, 
             PREVUGLOBAL = UGLOBAL;
         end
         UGLOBAL = NEXTUGLOBAL;
-        UGLOBALCOMPLETE(:,i) = UGLOBAL
+        UGLOBALCOMPLETE(:,i) = UGLOBAL;
     end
 
 end

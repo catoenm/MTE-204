@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-symbolSpec = '^*o.';
+symbolSpec = '.*o^';
 colorSpec = 'rbmk';
 
 loadCurves = 'Input_Files/Question2/curves/';
@@ -15,15 +15,11 @@ sctr = 'Input_Files/Question2/sctr_2.txt';
 option = 4;
 
 for i = 1:length(loadCurveFiles)
+    timeStamp = cputime;
     results(i).option = option;
     results(i).timeStep = loadCurveFiles(i).name(8:end);
-    [results(i).uGlobal, results(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
-end
-
-figure;
-hold on;
-for i = 1:length(results)
-    plot(i,results(i).uGlobal(2), strcat(colorSpec(i),symbolSpec(i)),'DisplayName',results(i).timeStep);
+    [results(i).uGlobal, results(i).fGlobal, results(i).uComplete] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
+    results(i).elapsedTime = cputime - timeStamp;
 end
 
 legend('show');
