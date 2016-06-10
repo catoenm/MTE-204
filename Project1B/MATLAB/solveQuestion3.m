@@ -22,7 +22,9 @@ sctr = 'Input_Files/Question3/sctr_3.txt';
 % Question 3d
 % *************************************************************************
 
-option = 4;
+time = linspace(0,500,50000);
+
+option = 2;
 for i = 1:length(loadCurveFiles)
     explicitResults(i).option = option;
     timeSteps{i} = loadCurveFiles(i).name(9:end-4);
@@ -38,28 +40,36 @@ accelerationW1 = diff(explicitNode2Disp(1, :), 2)/0.0001;
 accelerationW2 = diff(explicitNode2Disp(2, :), 2)/0.0001;
 accelerationW3 = diff(explicitNode2Disp(3, :), 2)/0.0001;
 
+horiz_axis = linspace(0, 50000, 1);
+
 figure;
 hold on
-plot(explicitNode2Disp(3, :), 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
-plot(explicitNode2Disp(2, :), 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
-plot(explicitNode2Disp(1, :), 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
+plot(time(1:size(explicitNode2Disp,2)),explicitNode2Disp(3, :), 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
+plot(time(1:size(explicitNode2Disp,2)), explicitNode2Disp(2, :), 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
+plot(time(1:size(explicitNode2Disp,2)), explicitNode2Disp(1, :), 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
 title('Question 3C: Displacement of Node 2 after 500ms');
 legend('show');
+xlabel('\Delta t (ms)');
+ylabel('Displacement (m)');
 
 figure;
 hold on
-plot(velocityW3, 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
-plot(velocityW2, 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
-plot(velocityW1, 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
+plot(time(1:(size(explicitNode2Disp,2) - 1)), velocityW3, 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
+plot(time(1:(size(explicitNode2Disp,2) - 1)), velocityW2, 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
+plot(time(1:(size(explicitNode2Disp,2) - 1)), velocityW1, 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
 title('Question 3C: Velocity of Node 2 after 500ms');
 legend('show');
+xlabel('\Delta t (ms)');
+ylabel('Displacement (m)');
 
 figure;
 hold on
-plot(accelerationW3, 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
-plot(accelerationW2, 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
-plot(accelerationW1, 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
+plot(time(1:(size(explicitNode2Disp,2) - 2)), accelerationW3, 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
+plot(time(1:(size(explicitNode2Disp,2) - 2)), accelerationW2, 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
+plot(time(1:(size(explicitNode2Disp,2) - 2)), accelerationW1, 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
 title('Question 3C: Acceleration of Node 2 after 500ms');
 legend('show');
+xlabel('\Delta t (ms)');
+ylabel('Displacement (m)');
 
 
