@@ -57,7 +57,7 @@ function [NEXTUGLOBAL, NEXTFGLOBAL, UGLOBALCOMPLETE] = runSimulation(nodesFile, 
 
     for i = 1:(length(LOAD_CURVE) - 3)
 
-        [NEXTUGLOBAL,NEXTFGLOBAL] = getBCs(numNodes, DOF, LOAD_CURVE, i);
+        [NEXTUGLOBAL,NEXTFGLOBAL] = getBCs(numNodes, DOF, LOAD_CURVE, i, FREE, FIXED);
 
         % Calculate next UGLOBAL and FGLOBAL
         [NEXTUGLOBAL,NEXTFGLOBAL] = solveMCKU( KGLOBAL, MGLOBAL, CGLOBAL,... 

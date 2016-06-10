@@ -1,4 +1,4 @@
-function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration )
+function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration, free, fixed )
 %GETBCS Summary of this function goes here
 %   Detailed explanation goes here
  
@@ -13,5 +13,8 @@ function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration )
             uGlobal(index) = loadCurve(iteration + 3,i);
         end
     end
+    
+    fGlobal(fixed) = nan;
+    uGlobal(free) = nan;
     
 end
