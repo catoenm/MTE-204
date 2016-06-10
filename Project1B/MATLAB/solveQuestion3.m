@@ -22,7 +22,7 @@ sctr = 'Input_Files/Question3/sctr_3.txt';
 % Question 3d
 % *************************************************************************
 
-option = 2;
+option = 4;
 for i = 1:length(loadCurveFiles)
     explicitResults(i).option = option;
     timeSteps{i} = loadCurveFiles(i).name(8:end-4);
@@ -37,6 +37,12 @@ velocityW3 = diff(explicitNode2Disp(3, :), 1)/0.000001;
 accelerationW1 = diff(explicitNode2Disp(1, :), 2)/0.000001;
 accelerationW2 = diff(explicitNode2Disp(2, :), 2)/0.000001;
 accelerationW3 = diff(explicitNode2Disp(3, :), 2)/0.000001;
+
+figure;
+title('Question 3C: Velocity of Node 2 after 500ms');
+plot(velocityW1);
+plot(velocityW2);
+plot(velocityW3);
 
 figure;
 title('Question 3C: Velocity of Node 2 after 500ms');
