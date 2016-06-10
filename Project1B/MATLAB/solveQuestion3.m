@@ -8,7 +8,7 @@ colorSpec = 'rbmk';
 loadCurves = 'Input_Files/Question3/curves/';
 fileType = '*.txt';
 loadCurveFiles = dir(strcat(loadCurves,fileType));
-props = 'Input_Files/Question3/props.txt';
+props = 'Input_Files/Question3/props_3.txt';
 nodes = 'Input_Files/Question3/nodes_3.txt';
 sctr = 'Input_Files/Question3/sctr_3.txt';
 
@@ -25,36 +25,41 @@ sctr = 'Input_Files/Question3/sctr_3.txt';
 option = 4;
 for i = 1:length(loadCurveFiles)
     explicitResults(i).option = option;
-    timeSteps{i} = loadCurveFiles(i).name(8:end-4);
+    timeSteps{i} = loadCurveFiles(i).name(9:end-4);
     [explicitResults(i).uGlobal, explicitResults(i).fGlobal, explicitResults(i).UComplete] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
-    explicitNode2Disp(i, :) = explicitResults(i).UComplete(2, :);
+    explicitNode2Disp(i, :) = explicitResults(i).UComplete(4, :);
 end
 
-velocityW1 = diff(explicitNode2Disp(1, :), 1)/0.000001;
-velocityW2 = diff(explicitNode2Disp(2, :), 1)/0.000001;
-velocityW3 = diff(explicitNode2Disp(3, :), 1)/0.000001;
+velocityW1 = diff(explicitNode2Disp(1, :), 1)/0.01;
+velocityW2 = diff(explicitNode2Disp(2, :), 1)/0.01;
+velocityW3 = diff(explicitNode2Disp(3, :), 1)/0.01;
 
-accelerationW1 = diff(explicitNode2Disp(1, :), 2)/0.000001;
-accelerationW2 = diff(explicitNode2Disp(2, :), 2)/0.000001;
-accelerationW3 = diff(explicitNode2Disp(3, :), 2)/0.000001;
+accelerationW1 = diff(explicitNode2Disp(1, :), 2)/0.0001;
+accelerationW2 = diff(explicitNode2Disp(2, :), 2)/0.0001;
+accelerationW3 = diff(explicitNode2Disp(3, :), 2)/0.0001;
 
 figure;
+hold on
+plot(explicitNode2Disp(3, :), 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
+plot(explicitNode2Disp(2, :), 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
+plot(explicitNode2Disp(1, :), 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
+title('Question 3C: Displacement of Node 2 after 500ms');
+legend('show');
+
+figure;
+hold on
+plot(velocityW3, 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
+plot(velocityW2, 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
+plot(velocityW1, 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
 title('Question 3C: Velocity of Node 2 after 500ms');
-plot(velocityW1);
-plot(velocityW2);
-plot(velocityW3);
+legend('show');
 
 figure;
-title('Question 3C: Velocity of Node 2 after 500ms');
-plot(velocityW1);
-plot(velocityW2);
-plot(velocityW3);
-
-figure;
+hold on
+plot(accelerationW3, 'g', 'DisplayName', strcat('\omega = ',timeSteps{3}));
+plot(accelerationW2, 'r', 'DisplayName', strcat('\omega = ',timeSteps{2}));
+plot(accelerationW1, 'b', 'DisplayName', strcat('\omega = ',timeSteps{1}));
 title('Question 3C: Acceleration of Node 2 after 500ms');
-plot(accelerationW1);
-plot(accelerationW2);
-plot(accelerationW3);
-
+legend('show');
 
 

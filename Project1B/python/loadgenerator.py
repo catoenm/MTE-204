@@ -25,7 +25,7 @@ for i in [1,10,100]:
   for ms in range(50000): 
 
     d = 50*math.sin(freq*ms/100)
-    row = (ms/float(100000),a,b,c,d)
+    row = (ms/float(100),a,b,c,d)
     writer.writerow(row)
 
   ofile.close()
