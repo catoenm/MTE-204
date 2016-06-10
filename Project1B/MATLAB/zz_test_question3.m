@@ -4,7 +4,7 @@ clear all
 props = 'Input_Files/Question3/props_3.txt';
 nodes = 'Input_Files/Question3/nodes_3.txt';
 sctr = 'Input_Files/Question3/sctr_3.txt';
-load_curve = 'Input_Files/Question3/curves/q3_freq_0.1.txt';
+load_curve = 'Input_Files/Question3/curves/q3_freq_1.0.txt';
 
 [uGlobal, fGlobal, uComplete] = runSimulation(nodes, sctr, props, load_curve, 4);
 
