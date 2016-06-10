@@ -5,12 +5,12 @@ close all
 symbolSpec = '^*o.';
 colorSpec = 'rbmk';
 
-loadCurves = 'Input_Files/Question1/curves/';
+loadCurves = 'Input_Files/Question3/curves/';
 fileType = '*.txt';
 loadCurveFiles = dir(strcat(loadCurves,fileType));
-props = 'Input_Files/Question1/props_1.txt';
-nodes = 'Input_Files/Question1/nodes_1.txt';
-sctr = 'Input_Files/Question1/sctr_1.txt';
+props = 'Input_Files/Question1/props.txt';
+nodes = 'Input_Files/Question1/nodes_3.txt';
+sctr = 'Input_Files/Question1/sctr_3.txt';
 
 % Options
 % 1 - Implicit, no damping
@@ -19,7 +19,7 @@ sctr = 'Input_Files/Question1/sctr_1.txt';
 % 4 - Explicit, with damping
 
 % *************************************************************************
-% Question 1a
+% Question 3d
 % *************************************************************************
 
 option = 4;
