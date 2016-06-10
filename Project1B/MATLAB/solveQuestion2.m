@@ -12,7 +12,7 @@ props = 'Input_Files/Question2/props_2.txt';
 nodes = 'Input_Files/Question2/nodes_2.txt';
 sctr = 'Input_Files/Question2/sctr_2.txt';
 
-option = 2;
+option = 4;
 
 for i = 1:length(loadCurveFiles)
     results(i).option = option;
