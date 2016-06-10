@@ -62,12 +62,12 @@ title('Question 1b: Displacement of Node 2 after 5 Seconds');
 ylim([0 1]);
 xlabel('\Delta t');
 ylabel('Displacement (m)');
-
+figure
 % *************************************************************************
 % Question 1c
 % *************************************************************************
 
-t = 5;
+t = linspace(0,5,10000);
 k = 10;
 m = 10;
 c = 1;
@@ -79,12 +79,15 @@ theta = atan(zeta/sqrt(1-zeta^2));
 uZero = 0;
 uDotZero = 0;
 firstTerm = F/k;
-secondTerm = F/(k*sqrt(1-zeta^2))*exp(-zeta*omegaN*t)*cos(omegaD*t - theta);
-thirdTerm = ((uDotZero + zeta*omegaN*uZero)/omegaD)*sin(omegaD*t);
-fourthTerm = uZero*cos(omegaD*t);
-fifthTerm = exp(-zeta*omegaN*t)*(thirdTerm + fourthTerm);
+secondTerm = F/(k*sqrt(1-zeta^2)).*exp(-zeta.*omegaN.*t).*cos(omegaD.*t - theta);
+thirdTerm = ((uDotZero + zeta*omegaN*uZero)/omegaD)*sin(omegaD.*t);
+fourthTerm = uZero*cos(omegaD.*t);
+fifthTerm = exp(-zeta*omegaN.*t).*(thirdTerm + fourthTerm);
 result = firstTerm - secondTerm + fifthTerm;
-
+plot(t,result);
+title('Question 1c: Analytical Solution For Motion of Node 2');
+xlabel('time (s)');
+ylabel('Displacement (m)');
 % *************************************************************************
 % Question 1d
 % *************************************************************************
