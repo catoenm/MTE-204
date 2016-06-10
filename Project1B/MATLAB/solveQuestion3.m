@@ -22,7 +22,7 @@ sctr = 'Input_Files/Question3/sctr_3.txt';
 % Question 3d
 % *************************************************************************
 
-option = 4;
+option = 2;
 for i = 1:length(loadCurveFiles)
     explicitResults(i).option = option;
     timeSteps{i} = loadCurveFiles(i).name(9:end-4);

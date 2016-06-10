@@ -11,10 +11,10 @@ b = 0
 c = 0
 
 #102
-for i in [1,10,100]:
+for i in range(1,100): #[1,10,100]:
 
   freq = i / float(10)
-  ofile  = open( "q3_freq_" + str(freq) + '.csv', "wb")
+  ofile  = open( "q3_freq_" + str(freq) + '.txt', "wb")
   writer = csv.writer(ofile, delimiter=',')
 
   writer.writerow(header1)
