@@ -3,7 +3,7 @@
 % Header: Christopher Kohar, University of Waterloo, Spring 2016
 %*************************************************************************
 
-function [NEXTUGLOBAL, NEXTFGLOBAL] = runSimulation(nodesFile, sctrFile, propsFile, loadCurveFile, option)
+function [NEXTUGLOBAL, NEXTFGLOBAL, UGLOBALCOMPLETE] = runSimulation(nodesFile, sctrFile, propsFile, loadCurveFile, OPTION)
 
     % % % **********************************************
     % % % Configure Options
@@ -14,8 +14,6 @@ function [NEXTUGLOBAL, NEXTFGLOBAL] = runSimulation(nodesFile, sctrFile, propsFi
         % 2 - Implicit, with damping
         % 3 - Explicit, no damping
         % 4 - Explicit, with damping
-
-    OPTION = option;
 
     % Constants for Implicit Formulation
     BETA = 8/5;
@@ -75,6 +73,7 @@ function [NEXTUGLOBAL, NEXTFGLOBAL] = runSimulation(nodesFile, sctrFile, propsFi
             PREVUGLOBAL = UGLOBAL;
         end
         UGLOBAL = NEXTUGLOBAL;
+        UGLOBALCOMPLETE(:,i) = UGLOBAL
     end
 
 end
