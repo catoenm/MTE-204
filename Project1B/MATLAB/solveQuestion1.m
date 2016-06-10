@@ -66,6 +66,7 @@ ylabel('Displacement (m)');
 % *************************************************************************
 % Question 1c
 % *************************************************************************
+
 t = 5;
 k = 10;
 m = 10;
@@ -82,7 +83,7 @@ secondTerm = F/(k*sqrt(1-zeta^2))*exp(-zeta*omegaN*t)*cos(omegaD*t - theta);
 thirdTerm = ((uDotZero + zeta*omegaN*uZero)/omegaD)*sin(omegaD*t);
 fourthTerm = uZero*cos(omegaD*t);
 fifthTerm = exp(-zeta*omegaN*t)*(thirdTerm + fourthTerm);
-result = firstTerm - secondTerm + fifthTerm
+result = firstTerm - secondTerm + fifthTerm;
 
 % *************************************************************************
 % Question 1d

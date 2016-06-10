@@ -34,7 +34,7 @@ function [NEXTUGLOBAL, NEXTFGLOBAL] = runSimulation(nodesFile, sctrFile, propsFi
     KGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
     CGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
     MGLOBAL = zeros(numNodes*DOF, numNodes*DOF);
-    [FIXED,FREE] = buildFixedFree(DOF, numNodes, LOAD_CURVE);
+    [FIXED,FREE] = buildFixedFree(DOF, numNodes, LOAD_CURVE)
     [AREA,YOUNG,DENSITY,DAMPING] = process_material_props(PROPS);
 
     % % % ******************************************************
