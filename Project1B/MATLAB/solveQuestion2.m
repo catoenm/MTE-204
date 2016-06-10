@@ -12,7 +12,7 @@ props = 'Input_Files/Question2/props_2.txt';
 nodes = 'Input_Files/Question2/nodes_2.txt';
 sctr = 'Input_Files/Question2/sctr_2.txt';
 
-option = 4;
+option = 2;
 
 for i = 1:length(loadCurveFiles)
     timeStamp = cputime;
@@ -21,7 +21,4 @@ for i = 1:length(loadCurveFiles)
     [results(i).uGlobal, results(i).fGlobal, results(i).uComplete] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
     results(i).elapsedTime = cputime - timeStamp;
 end
-
-legend('show');
-title('Question 2: ---');
 

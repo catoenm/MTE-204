@@ -50,15 +50,16 @@ end
 % Question 2c - Explicit Dynamics with Damping
 % *************************************************************************
 
-load('Input_Files/Question2/resultsOption4.mat')
+load('Input_Files/Question2/resultsOption2.mat')
 deltaT = [100,0.01,1];
 
 for i = 1:length(results)
+    figure;
     timeValues = (1:length(results(i).uComplete(11,:))).*deltaT(i);
     plot(timeValues, results(i).uComplete(11,:),...
         colourSpec(i) , 'DisplayName', strcat('\Delta t= ', results(i).timeStep(1:end-4)));
 
-    title('Calcuated Displacement vs Time');
+    title('Calcuated Displacement vs Time Using Implicit Dynamics');
     xlabel('Time (ms)');
     ylabel('Displacement (m)');
     legend('show');
