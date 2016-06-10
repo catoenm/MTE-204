@@ -41,7 +41,7 @@ function [NEXTUGLOBAL, NEXTFGLOBAL, UGLOBALCOMPLETE] = runSimulation(nodesFile, 
     [GPROPS]  = buildGPROPS (NODES,DOF,AREA,YOUNG,SCTR);
     [KGLOBAL] = buildKGLOBAL(DOF,KGLOBAL,SCTR,GPROPS);
     [CGLOBAL] = buildCGLOBAL(DAMPING,DOF,CGLOBAL,SCTR,GPROPS);
-    [MGLOBAL] = buildMGLOBAL(AREA,DENSITY,MGLOBAL,SCTR,GPROPS);
+    [MGLOBAL] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,SCTR,GPROPS);
 
     % % % ******************************************************
     % Set initial acceleration, velocity and prev displacement to 0
