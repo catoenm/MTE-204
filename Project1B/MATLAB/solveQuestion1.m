@@ -66,17 +66,17 @@ ylabel('Displacement (m)');
 % *************************************************************************
 % Question 1c
 % *************************************************************************
-
-k = 
-m = 
-c =
-F =
-omegaN = sqrt(k/m);
-zeta = c/(2*m*omegaN);
-omegaD = omegaN*sqrt(1-zeta^2);
-theta = arctan(zeta/qrt(1-zeta^2));
-firstTerm = F/k;
-secondTerm = F/
+% 
+% k = 
+% m = 
+% c =
+% F =
+% omegaN = sqrt(k/m);
+% zeta = c/(2*m*omegaN);
+% omegaD = omegaN*sqrt(1-zeta^2);
+% theta = arctan(zeta/qrt(1-zeta^2));
+% firstTerm = F/k;
+% secondTerm = F/
 
 % *************************************************************************
 % Question 1d

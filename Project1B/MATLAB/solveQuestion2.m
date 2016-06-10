@@ -14,7 +14,7 @@ sctr = 'Input_Files/Question2/sctr_2.txt';
 
 option = 2;
 
-for i = 1:length(loadCurveFiles)
+for i = 1:1
     results(i).option = option;
     results(i).timeStep = loadCurveFiles(i).name(8:end);
     [results(i).uGlobal, results(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);

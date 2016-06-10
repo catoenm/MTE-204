@@ -2,7 +2,7 @@ function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration )
 %GETBCS Summary of this function goes here
 %   Detailed explanation goes here
  
-    fGlobal = zeros(numNodes*DOF,1).*nan;
+    fGlobal = zeros(numNodes*DOF,1);
     uGlobal = fGlobal;
     
     for i = 2:size(loadCurve, 2)
