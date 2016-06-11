@@ -1,0 +1,1 @@
+Note: Most of the load curves in this folder are omitted to reduce the size of the code submission. To create the full acceleration vs omega curve 100 load curves were used. 

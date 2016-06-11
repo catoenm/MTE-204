@@ -3,6 +3,8 @@ clear all
 close all
 
 % load 100 load curves from omega = 0.1 to omega = 10
+% note: do reduce submission size on learn, only 4 of the following load curves are
+% included in the zip
 loadCurves = 'Input_Files/Question3/curves/frequencyRange/';
 fileType = '*.txt';
 loadCurveFiles = dir(strcat(loadCurves,fileType));
