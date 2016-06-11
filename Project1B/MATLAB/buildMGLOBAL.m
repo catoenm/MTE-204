@@ -1,6 +1,5 @@
 function [ MGLOBAL ] = buildMGLOBAL(AREA,DENSITY,DOF,MGLOBAL,SCTR,GPROPS)
-%buildGlobalMass
-%   Handle global mass matrix creation
+    % Handle global mass matrix creation
     sctr_size = size(SCTR,1);
     
     for el = 1:sctr_size % each element

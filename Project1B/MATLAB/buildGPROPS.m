@@ -1,6 +1,5 @@
 function [GPROPS] = buildGPROPS(NODES,DOF,YOUNG,AREA,SCTR)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+    % builds gemometric properties 
     sctr_size = size(SCTR, 1); % # of elements/rows in SCTR
 
     % initializing in properties matrix

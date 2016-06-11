@@ -1,6 +1,5 @@
 function [ CGLOBAL ] = buildCGLOBAL(DAMPING,DOF,CGLOBAL,SCTR,GPROPS)
-    %buildGlobalDamping
-    %   Handle global damping matrix creation
+    % Handles global damping matrix creation
     
     sctr_size = size(SCTR,1);
     

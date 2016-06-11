@@ -1,6 +1,5 @@
 function [ FIXED, FREE ] = buildFixedFree( DOF, numNodes, loadCurve )
-    %UNTITLED Summary of this function goes here
-    %   Detailed explanation goes here
+    % Generates fixed and free vectors
  
     for i = 2:size(loadCurve, 2)
         if loadCurve(1,i) == 0

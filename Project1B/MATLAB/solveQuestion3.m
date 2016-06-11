@@ -23,13 +23,19 @@ sctr = 'Input_Files/Question3/sctr_3.txt';
 % *************************************************************************
 
 time = linspace(0,500,50000);
+disp('Explicit Dynamics')
 
 option = 2;
 for i = 1:length(loadCurveFiles)
     explicitResults(i).option = option;
     timeSteps{i} = loadCurveFiles(i).name(9:end-4);
+    disp(timeSteps{i})
     [explicitResults(i).uGlobal, explicitResults(i).fGlobal, explicitResults(i).UComplete] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
     explicitNode2Disp(i, :) = explicitResults(i).UComplete(4, :);
+    disp('uGlobal')
+    disp(explicitResults(i).uGlobal)
+    disp('fGlobal')
+    disp(explicitResults(i).fGlobal)
 end
 
 velocityW1 = diff(explicitNode2Disp(1, :), 1)/0.01;

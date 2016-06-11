@@ -1,6 +1,5 @@
 function [ uGlobal, fGlobal ] = getBCs( numNodes, DOF, loadCurve, iteration, free, fixed )
-%GETBCS Summary of this function goes here
-%   Detailed explanation goes here
+    % Input boundary conditions into the global U and F vectors
  
     fGlobal = zeros(numNodes*DOF,1);
     uGlobal = fGlobal;

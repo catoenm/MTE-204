@@ -1,0 +1,53 @@
+Question 1 Solutions
+
+Global Forces (Implicit)
+1000ms Time Step
+   -9.8811
+   10.0000
+
+100ms Time Step
+   -7.7517
+   10.0000
+
+10ms Time Step
+   -7.4836
+   10.0000
+
+Global Forces (Explicit)
+1000ms Time Step
+   -2.2215
+   10.0000
+
+100ms Time Step
+   -7.0868
+   10.0000
+
+10ms Time Step
+   -7.4267
+   10.0000
+
+Global Displacements (Implicit)
+1000ms Time Step
+         0
+    0.9965
+
+100ms Time Step
+         0
+    0.8312
+
+10ms Time Step
+         0
+    0.8211
+
+Global Displacements (Explicit)
+1000ms Time Step
+         0
+    0.2577
+
+100ms Time Step
+         0
+    0.7101
+
+10ms Time Step
+         0
+    0.8100

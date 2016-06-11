@@ -27,8 +27,8 @@ option = 4;
 for i = 1:length(loadCurveFiles)
     explicitResults(i).option = option;
     timeSteps{i} = loadCurveFiles(i).name(8:end-4);
-    [explicitResults(1).uGlobal, explicitResults(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
-    explicitNode2Disp(1,i) = explicitResults(1).uGlobal(2);
+    [explicitResults(i).uGlobal, explicitResults(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
+    explicitNode2Disp(1,i) = explicitResults(i).uGlobal(2);
 end
 
 figure
@@ -51,8 +51,8 @@ figure;
 hold on;
 for i = 1:length(loadCurveFiles)
     timeSteps{i} = loadCurveFiles(i).name(8:end-4);
-    [implicitResults(1).uGlobal, implicitResults(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
-    implicitNode2Disp(1,i) = implicitResults(1).uGlobal(2);
+    [implicitResults(i).uGlobal, implicitResults(i).fGlobal] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
+    implicitNode2Disp(1,i) = implicitResults(i).uGlobal(2);
 end
 
 bar(implicitNode2Disp,'b','DisplayName','Implicit Dynamics');
@@ -92,7 +92,7 @@ ylabel('Displacement (m)');
 % Question 1d
 % *************************************************************************
 
-disp('Question 1D:')
+%disp('Question 1D:')
 disp('Global Forces (Implicit)')
 
 for i = 1:length(loadCurveFiles)
@@ -106,4 +106,22 @@ disp('Global Forces (Explicit)')
 for i = 1:length(loadCurveFiles)
     disp(timeSteps{i})
     disp(explicitResults(i).fGlobal)
+end
+
+% *************************************************************************
+% Print Global Displacemnts
+% *************************************************************************
+
+disp('Global Displacements (Implicit)')
+
+for i = 1:length(loadCurveFiles)
+    disp(timeSteps{i})
+    disp(implicitResults(i).uGlobal)
+end
+
+disp('Global Displacements (Explicit)')
+
+for i = 1:length(loadCurveFiles)
+    disp(timeSteps{i})
+    disp(explicitResults(i).uGlobal)
 end

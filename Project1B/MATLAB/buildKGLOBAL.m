@@ -1,6 +1,4 @@
 function [KGLOBAL] = buildKGLOBAL(DOF,KGLOBAL,SCTR,GPROPS)
-
-
     % % % This function receives the node list, the elemental connectivity
     % matrix, degree of freedom of the problem, elastic modulus, area and an
     % empty Kglobal matrix.
@@ -10,8 +8,6 @@ function [KGLOBAL] = buildKGLOBAL(DOF,KGLOBAL,SCTR,GPROPS)
 
     % % % At the end of the function, the fully assembled Kglobal matrix is
     % % % returned.
-
-    %GPROPS INPUTTED
 
     sctr_size = size(SCTR,1);
     
