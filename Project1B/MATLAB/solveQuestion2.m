@@ -16,11 +16,13 @@ option = 4;
 for i = 1:length(loadCurveFiles)
     timeStamp = cputime;
     results(i).option = option;
-    results(i).timeStep = loadCurveFiles(i).name(8:end);
+    results(i).timeStep = loadCurveFiles(i).name(8:end-4);
     disp(results(i).timeStep);
     [results(i).uGlobal, results(i).fGlobal, results(i).uComplete] = runSimulation(nodes, sctr, props, strcat(loadCurves, loadCurveFiles(i).name), option);
-    results(i).uGlobal
-    results(i).fGlobal
+    disp('uGlobal')
+    disp(results(i).uGlobal)
+    disp('fGlobal')
+    disp(results(i).fGlobal)
     results(i).elapsedTime = cputime - timeStamp;
 end
 
