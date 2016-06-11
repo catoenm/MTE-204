@@ -2,6 +2,7 @@ clc
 clear all
 close all
 
+% load 100 load curves from omega = 0.1 to omega = 10
 loadCurves = 'Input_Files/Question3/curves/frequencyRange/';
 fileType = '*.txt';
 loadCurveFiles = dir(strcat(loadCurves,fileType));
@@ -11,6 +12,7 @@ sctr = 'Input_Files/Question3/sctr_3.txt';
 
 option = 2;
 
+% Calculate the maximum acceleration
 for i = 1:length(loadCurveFiles)
     results(i).option = option;
     omega(i) = str2num(loadCurveFiles(i).name(9:end-4));
