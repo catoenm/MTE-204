@@ -1,4 +1,4 @@
-function [STRESS, FORCES] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,KGLOBAL, AREA, )
+function [STRESS, FORCES] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,KGLOBAL,AREA)
 
     % % % This function returns the stress in a spring/bar element
     % % % This function receives the elemental connectivity matrix, nodal
@@ -37,5 +37,17 @@ function [STRESS, FORCES] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,KGLOBAL, AREA
     % Calculate stress
     STRESS = ((new_length - initial_length)./initial_length).*YOUNG;
     
-
+    for (i = size(SCTR,1))
+        index1 = SCTR(i, 1); % index of 1st node 
+        index2 = SCTR(i, 2); % index of 2nd node
+        delx = NODES(index1, 1) - NODES(index2, 1); % get x delta
+        dely = NODES(index1, 2) - NODES(index2, 2); % get y delta
+        angle  = atan(dely/delx); % calculate angle
+        a = cos(angle); % a is the consine of the angle 
+        b = sin(angle); % b " " sine
+        TRANSF = [a,b,0,0;
+                  -b,a,0,0;
+                  0,0,a,b]
+    end
+    
 end
