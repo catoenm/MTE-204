@@ -1,0 +1,64 @@
+MTE 204 - Project 1a Submission Document
+Group #16
+Name Student 1: Mitchell Catoen ID: 20563284
+Name Student 2: Danyon Chu ID: 20563165
+Name Student 3: Devon Copeland ID: 20553468
+Name Student 4: Ross Duquette ID: 20553972
+Name Student 5: David Ferris ID: 20553578
+Name Student 6: Justin Lim ID: 20555755
+
+///***************************************************
+/// SOLUTIONS TO Problem 1b - 2016
+///***************************************************
+/// Calculated Forces (N)
+FA = 2630.000000, FB = 600.000000
+FC = 380.000000, FD = 3550.000000
+
+/// NODAL POSITIONS (mm)
+U1x  =   -0.00024, U1y  =    0.00000
+U2x  =    0.00000, U2y  =    0.00000
+U3x  =   -0.00252, U3y  =    0.00359
+U4x  =   -0.00131, U4y  =    0.00000
+U5x  =    0.00000, U5y  =    0.00000
+U6x  =   -0.00060, U6y  =   -0.00035
+U7x  =   -0.01435, U7y  =    0.00829
+U8x  =   -0.00229, U8y  =   -0.00031
+U9x  =   -0.00436, U9y  =    0.00176
+U10x  =   -0.01895, U10y  =    0.00967
+U11x  =   -0.01204, U11y  =    0.00161
+
+/// NODAL FORCES (Newtons)
+F1x =    0.00000, F1y =  208.68040
+F2x = 1379.83211, F2y = -977.65153
+F3x = -173.20508, F3y = -100.00000
+F4x =    0.00000, F4y = -259.46531
+F5x = 1583.54142, F5y = -1604.17026
+F6x =    0.00000, F6y =    0.00000
+F7x =   -0.00000, F7y =    0.00000
+F8x =  -70.71068, F8y =   70.71068
+F9x =    0.00000, F9y =    0.00000
+F10x = -2719.45777, F10y = 2281.89601
+F11x =    0.00000, F11y =  380.00000
+
+/// Element Stresses (MPa)
+/// ID, Node 1, Node 2, STRESS[MPa]
+--------------------------------------------------------
+1, 1, 2, 0.048194 [Tension]
+2, 1, 6, 0.096386 [Compression]
+3, 2, 6, 0.000056 [Compression]
+4, 2, 3, 0.503967 [Compression]
+5, 2, 7, 0.000431 [Tension]
+6, 6, 10, 0.096370 [Compression]
+7, 7, 10, 0.698998 [Tension]
+8, 10, 11, 0.690415 [Tension]
+9, 3, 8, 0.652606 [Compression]
+10, 8, 4, 0.044244 [Tension]
+11, 3, 4, 0.241031 [Tension]
+12, 11, 9, 0.741158 [Tension]
+13, 11, 8, 0.640829 [Compression]
+14, 4, 9, 0.000429 [Tension]
+15, 4, 5, 0.262938 [Tension]
+16, 5, 9, 0.740941 [Tension]
+17, 2, 10, 0.390764 [Tension]
+18, 3, 7, 0.698797 [Tension]
+19, 4, 11, 0.065101 [Tension]
