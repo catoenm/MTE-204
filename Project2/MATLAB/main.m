@@ -63,7 +63,7 @@ clear all;
 % % % **********************************************************
 % % % Step 7: Post Processing
 % % % **********************************************************   
-[STRESS] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,KGLOBAL,AREA);
+[STRESS,FORCES] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,AREA);
 writedataout('projectSOLUTIONS_1b.txt',NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
 
 
