@@ -1,0 +1,36 @@
+MTE 204 - Project 1a Submission Document
+Group #16
+Name Student 1: Mitchell Catoen ID: 20563284
+Name Student 2: Danyon Chu ID: 20563165
+Name Student 3: Devon Copeland ID: 20553468
+Name Student 4: Ross Duquette ID: 20553972
+Name Student 5: David Ferris ID: 20553578
+Name Student 6: Justin Lim ID: 20555755
+
+///***************************************************
+/// SOLUTIONS TO Problem 1b - 2016
+///***************************************************
+/// Calculated Forces (N)
+FA = 2630.000000, FB = 600.000000
+FC = 380.000000, FD = 3550.000000
+
+/// NODAL POSITIONS (mm)
+U1x  =    0.00000, U1y  =    0.00000
+U2x  =   -0.03522, U2y  =   -0.59588
+U3x  =   -0.14088, U3y  =    0.00000
+U4x  =   -0.28983, U4y  =   -0.52930
+
+/// NODAL FORCES (Newtons)
+F1x =    0.00000, F1y =   60.45413
+F2x =   -0.00000, F2y =  -83.38500
+F3x =    0.00000, F3y =   22.93088
+F4x =    0.00000, F4y =   -0.00000
+
+/// Element Stresses (MPa)
+/// ID, Node 1, Node 2, STRESS[MPa]
+--------------------------------------------------------
+1, 1, 2, 0.640346 [Compression]
+2, 1, 4, 2.193479 [Tension]
+3, 2, 3, 0.728669 [Compression]
+4, 2, 4, 0.831852 [Compression]
+5, 3, 4, 1.908559 [Tension]
