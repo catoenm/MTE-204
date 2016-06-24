@@ -7,6 +7,8 @@ clc;
 close all;
 clear all;
 
+bridgeID = 'tacoma';
+
 % % % **********************************************
 % % % THE CORE FINITE ELEMENT STEPS
 % % % **********************************************
@@ -23,11 +25,11 @@ clear all;
 % % % Step One: Input Information, determine DOF, and initialize
 % % % **********************************************
 [NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES] = open_files(...
-               'tacoma/nodes.txt',...
-               'tacoma/sctr.txt',...
-               'tacoma/props.txt',...
-               'tacoma/nodeBCs.txt',...
-               'tacoma/nodeFORCES.txt');
+               strcat(bridgeID,'/nodes.txt'),...
+               strcat(bridgeID,'/sctr.txt'),...
+               strcat(bridgeID,'/props.txt'),...
+               strcat(bridgeID,'/nodeBCs.txt'),...
+               strcat(bridgeID, '/nodeFORCES.txt'));
 
 [DOF] = get_DOF(NODES);
 [KGLOBAL,FGLOBAL,UGLOBAL] = initialize_matrices(DOF,size(NODES,1));
@@ -57,7 +59,7 @@ clear all;
 % % % Step 7: Post Processing
 % % % **********************************************************   
 [STRESS,FORCES] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,AREA);
-writedataout('projectSOLUTIONS_tacoma.txt',NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS, FORCES)
+writedataout(strcat('projectSOLUTIONS_',bridgeID,'.txt'),NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS, FORCES)
 
 
 
