@@ -1,4 +1,4 @@
-function writedataout(filename,NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS)
+function writedataout(filename,NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS,FORCES)
 % % % This function outputs a file a containing all the information
 % % % required as presented in the DEMO submission file.
 
@@ -127,6 +127,22 @@ for ii = 1:num_rows
         fprintf(fid2,'[Tension]\n');  
     end
 end    
+
+fprintf(fid2, '\n%s\n%s\n%s\n', char(hFile{1,1}(11,1)), char(hFile{1,1}(12,1)), char(hFile{1,1}(13,1)));
+
+for ii = 1:num_rows 
+    fprintf(fid2,'%d, ',ii); %prints out element number
+    for jj = 1:num_columns
+        fprintf(fid2,'%d, ',SCTR(ii,jj)); %prints out first node, then second node
+    end
+    fprintf(fid2,'%f ',abs(FORCES(ii))); %print out absolute stress value
+    
+    if FORCES(ii) < 0 %if stress is negative, then stress is compressive
+        fprintf(fid2,'[Compression]\n');
+    else
+        fprintf(fid2,'[Tension]\n');  
+    end
+end
 
 fclose(fid2);
 
