@@ -1,0 +1,53 @@
+MTE 204 - Project 1a Submission Document
+Group #16
+Name Student 1: Mitchell Catoen ID: 20563284
+Name Student 2: Danyon Chu ID: 20563165
+Name Student 3: Devon Copeland ID: 20553468
+Name Student 4: Ross Duquette ID: 20553972
+Name Student 5: David Ferris ID: 20553578
+Name Student 6: Justin Lim ID: 20555755
+
+///***************************************************
+/// SOLUTIONS TO Problem 1b - 2016
+///***************************************************
+/// Calculated Forces (N)
+FA = 2630.000000, FB = 600.000000
+FC = 380.000000, FD = 3550.000000
+
+/// NODAL POSITIONS (mm)
+U1x  =    0.00000, U1y  =    0.00000
+U2x  =    0.16599, U2y  =   -0.26476
+U3x  =    0.18163, U3y  =    0.00000
+
+/// NODAL FORCES (Newtons)
+F1x =   -0.00000, F1y =   32.11025
+F2x =   -0.00000, F2y =  -44.29000
+F3x =    0.00000, F3y =   12.17975
+
+/// Element Stresses (MPa)
+/// ID, Node 1, Node 2, STRESS[MPa]
+--------------------------------------------------------
+1, 1, 2, 0.496817 [Compression]
+2, 1, 3, 0.908148 [Tension]
+3, 2, 3, 0.406122 [Compression]
+
+/// Element Internal Forces (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------
+1, 1, 2, 51.580778 [Compression]
+2, 1, 3, 40.367171 [Tension]
+3, 2, 3, 42.164616 [Compression]
+
+/// Bucklin Analysis (Iyy -> ZBuckling) - Critical Force (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------
+1, 1, 2, 1661.330745 [No Buckling Failure]
+2, 1, 3, NaN [N/A - Tension]
+3, 2, 3, 357.704958 [No Buckling Failure]
+
+/// Bucklin Analysis (Izz -> YBuckling) - Critical Force (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------
+1, 1, 2, 813.206944 [No Buckling Failure]
+2, 1, 3, NaN [N/A - Tension]
+3, 2, 3, 175.093464 [No Buckling Failure]

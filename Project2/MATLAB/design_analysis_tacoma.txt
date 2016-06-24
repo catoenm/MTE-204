@@ -16,7 +16,6 @@ FC = 380.000000, FD = 3550.000000
 
 /// NODAL POSITIONS (mm)
 U1x  =    0.00000, U1y  =    0.00000
-<<<<<<< HEAD
 U2x  =   -0.01871, U2y  =   -0.31650
 U3x  =   -0.07483, U3y  =    0.00000
 U4x  =   -0.15394, U4y  =   -0.28114
@@ -26,40 +25,39 @@ F1x =   -0.00000, F1y =   32.11025
 F2x =    0.00000, F2y =  -44.29000
 F3x =    0.00000, F3y =   12.17975
 F4x =   -0.00000, F4y =   -0.00000
-=======
-U2x  =   -0.03729, U2y  =   -0.63093
-U3x  =   -0.14916, U3y  =    0.00000
-U4x  =   -0.30688, U4y  =   -0.56044
-
-/// NODAL FORCES (Newtons)
-F1x =   -0.00000, F1y =   64.01025
-F2x =   -0.00000, F2y =  -88.29000
-F3x =    0.00000, F3y =   24.27975
-F4x =    0.00000, F4y =   -0.00000
->>>>>>> 5602b081df19efa16a0615aa690590c91f306f03
 
 /// Element Stresses (MPa)
 /// ID, Node 1, Node 2, STRESS[MPa]
 --------------------------------------------------------
-<<<<<<< HEAD
 1, 1, 2, 0.340120 [Compression]
 2, 1, 4, 1.165068 [Tension]
 3, 2, 3, 0.387033 [Compression]
 4, 2, 4, 0.441839 [Compression]
 5, 3, 4, 1.013732 [Tension]
-=======
-1, 1, 2, 0.678013 [Compression]
-2, 1, 4, 2.322507 [Tension]
-3, 2, 3, 0.771532 [Compression]
-4, 2, 4, 0.880785 [Compression]
-5, 3, 4, 2.020827 [Tension]
 
 /// Element Internal Forces (N)
 /// ID, Node 1, Node 2, FORCE[N]
 --------------------------------------------------------
-1, 1, 2, 68.350507 [Compression]
-2, 1, 4, 93.643494 [Tension]
-3, 2, 3, 77.778163 [Compression]
-4, 2, 4, 88.791919 [Compression]
-5, 3, 4, 81.479746 [Tension]
->>>>>>> 5602b081df19efa16a0615aa690590c91f306f03
+1, 1, 2, 34.287507 [Compression]
+2, 1, 4, 46.975539 [Tension]
+3, 2, 3, 39.016818 [Compression]
+4, 2, 4, 44.541784 [Compression]
+5, 3, 4, 40.873688 [Tension]
+
+/// Bucklin Analysis (Iyy -> ZBuckling) - Critical Force (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------
+1, 1, 2, 3204.985186 [No Buckling Failure]
+2, 1, 4, NaN [N/A - Tension]
+3, 2, 3, 461.121531 [No Buckling Failure]
+4, 2, 4, 4371.917791 [No Buckling Failure]
+5, 3, 4, NaN [N/A - Tension]
+
+/// Bucklin Analysis (Izz -> YBuckling) - Critical Force (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------
+1, 1, 2, 1795.896871 [No Buckling Failure]
+2, 1, 4, NaN [N/A - Tension]
+3, 2, 3, 258.387065 [No Buckling Failure]
+4, 2, 4, 2449.781521 [No Buckling Failure]
+5, 3, 4, NaN [N/A - Tension]

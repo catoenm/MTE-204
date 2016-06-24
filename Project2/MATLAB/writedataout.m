@@ -1,4 +1,4 @@
-function writedataout(filename,NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS,FORCES)
+function writedataout(filename,NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS,FORCES, BUCKLINGFORCE)
 % % % This function outputs a file a containing all the information
 % % % required as presented in the DEMO submission file.
 
@@ -141,6 +141,46 @@ for ii = 1:num_rows
         fprintf(fid2,'[Compression]\n');
     else
         fprintf(fid2,'[Tension]\n');  
+    end
+end
+
+fprintf(fid2, '\n%s\n%s\n%s\n', char(hFile{1,1}(14,1)), char(hFile{1,1}(15,1)), char(hFile{1,1}(16,1)));
+
+for ii = 1:num_rows 
+    fprintf(fid2,'%d, ',ii); %prints out element number
+    for jj = 1:num_columns
+        fprintf(fid2,'%d, ',SCTR(ii,jj)); %prints out first node, then second node
+    end
+    fprintf(fid2,'%f ',abs(BUCKLINGFORCE(ii, 1))); %print out absolute stress value
+    
+    if FORCES(ii) < 0 %if stress is negative, then stress is compressive
+        if abs(FORCES(ii)) > BUCKLINGFORCE(ii, 1)
+            fprintf(fid2,'[Buckling Failure]\n');
+        else
+            fprintf(fid2,'[No Buckling Failure]\n');
+        end
+    else
+        fprintf(fid2,'[N/A - Tension]\n');  
+    end
+end
+
+fprintf(fid2, '\n%s\n%s\n%s\n', char(hFile{1,1}(17,1)), char(hFile{1,1}(18,1)), char(hFile{1,1}(19,1)));
+
+for ii = 1:num_rows 
+    fprintf(fid2,'%d, ',ii); %prints out element number
+    for jj = 1:num_columns
+        fprintf(fid2,'%d, ',SCTR(ii,jj)); %prints out first node, then second node
+    end
+    fprintf(fid2,'%f ',abs(BUCKLINGFORCE(ii, 2))); %print out absolute stress value
+    
+    if FORCES(ii) < 0 %if stress is negative, then stress is compressive
+        if abs(FORCES(ii)) > BUCKLINGFORCE(ii, 2)
+            fprintf(fid2,'[Buckling Failure]\n');
+        else
+            fprintf(fid2,'[No Buckling Failure]\n');
+        end
+    else
+        fprintf(fid2,'[N/A - Tension]\n');  
     end
 end
 
