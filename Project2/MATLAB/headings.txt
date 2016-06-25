@@ -11,3 +11,9 @@
 /// Element Internal Forces (N)
 /// ID, Node 1, Node 2, FORCE[N]
 --------------------------------------------------------
+/// Bucklin Analysis (Iyy -> ZBuckling) - Critical Force (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------
+/// Bucklin Analysis (Izz -> YBuckling) - Critical Force (N)
+/// ID, Node 1, Node 2, FORCE[N]
+--------------------------------------------------------

@@ -24,12 +24,13 @@ bridgeID = 'tacoma';
 % % % **********************************************
 % % % Step One: Input Information, determine DOF, and initialize
 % % % **********************************************
-[NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES] = open_files(...
+[NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES, MOI] = open_files(...
                strcat(bridgeID,'/nodes.txt'),...
                strcat(bridgeID,'/sctr.txt'),...
                strcat(bridgeID,'/props.txt'),...
                strcat(bridgeID,'/nodeBCs.txt'),...
-               strcat(bridgeID, '/nodeFORCES.txt'));
+               strcat(bridgeID, '/nodeFORCES.txt'),...
+               strcat(bridgeID, '/moi.txt'));
 
 [DOF] = get_DOF(NODES);
 [KGLOBAL,FGLOBAL,UGLOBAL] = initialize_matrices(DOF,size(NODES,1));
@@ -59,11 +60,6 @@ bridgeID = 'tacoma';
 % % % Step 7: Post Processing
 % % % **********************************************************   
 [STRESS,FORCES] = getSTRESS(SCTR,NODES,YOUNG,DOF,UGLOBAL,AREA);
-writedataout(strcat('projectSOLUTIONS_',bridgeID,'.txt'),NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS, FORCES)
+[BUCKLINGFORCE] = getBUCKLING(NODES,SCTR,YOUNG,AREA,MOI);
 
-
-
-
-
-
-
+writedataout(strcat('design_analysis_', bridgeID,'.txt'),NODES,SCTR,DOF,UGLOBAL,FGLOBAL,STRESS, FORCES, BUCKLINGFORCE)

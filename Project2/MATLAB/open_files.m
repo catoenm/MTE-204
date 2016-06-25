@@ -1,4 +1,4 @@
-function [NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES] = open_files(nodes,sctr,props,nodeBC,nodeFORCES)
+function [NODES,SCTR,PROPS,NODAL_BCS,NODAL_FORCES,MOI] = open_files(nodes,sctr,props,nodeBC,nodeFORCES,moi)
 
 % % % This function receives a list of five file names, reads the data, and
 % % % returns them as arrays
@@ -30,5 +30,6 @@ SCTR = load(sctr);
 PROPS = load(props);
 NODAL_BCS = load(nodeBC);
 NODAL_FORCES = load(nodeFORCES);
+MOI = load(moi);
 
 return
