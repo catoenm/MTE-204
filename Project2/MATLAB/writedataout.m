@@ -184,6 +184,17 @@ for ii = 1:num_rows
     end
 end
 
+fprintf(fid2, '\n%s\n%s\n%s\n', char(hFile{1,1}(20,1)), char(hFile{1,1}(21,1)), char(hFile{1,1}(11,1)));
+
+for ii = 1:num_rows 
+    fprintf(fid2,'%d, ',ii); %prints out element number
+    for jj = 1:num_columns
+        fprintf(fid2,'%d, ',SCTR(ii,jj)); %prints out first node, then second node
+    end
+    fprintf(fid2,'%f ',min(abs(BUCKLINGFORCE(ii, :)))/abs(FORCES(ii)) ); %print out absolute stress value
+    fprintf(fid2,'\n');  
+end
+
 fclose(fid2);
 
 end

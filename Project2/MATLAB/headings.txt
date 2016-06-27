@@ -17,3 +17,6 @@
 /// Bucklin Analysis (Izz -> YBuckling) - Critical Force (N)
 /// ID, Node 1, Node 2, FORCE[N]
 --------------------------------------------------------
+/// Buckling Safety Factor
+/// ID, Node 1, Node 2, Safety Factor
+--------------------------------------------------------
