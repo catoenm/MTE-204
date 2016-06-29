@@ -1,4 +1,4 @@
- % ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
 %
 % PROJECT 2 - omptimizePM.m
 % 
@@ -88,7 +88,7 @@ total_mass = sum(element_mass)*2+PINMASS
 total_applied_load_grams = 2*abs(appliedLoad)*1000/9.81
 
 % Calculate PM
-pm = (5/6) * total_applied_load_grams * total_mass^(1.2/(1.2*1.3))
+pm = (5/6) * total_applied_load_grams /( total_mass^(1/1.3))
 
 % ---------------------------------------------------------------------- %
 % Plot Data:
