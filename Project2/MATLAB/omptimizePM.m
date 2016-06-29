@@ -74,9 +74,10 @@ sctrIndex = 1; %TODO: fix this
 [criticalForces, appliedLoad] = getCriticalForces(a, sctrIndex, SCTR, TRUSSRATIO); 
 
 drivingDimensions = zeros(numElements);
+areas = zeros(numElements);
 
 for x = 1:1:numElements
-    drivingDimensions(x) = getMemberDimension(criticalForces(x), E, ULTIMATE_STRENGTH);
+    [drivingDimensions(x), areas(x)] = getMemberDimension(criticalForces(x), E, ULTIMATE_STRENGTH);
 end
 
 % Calculate area of each member
