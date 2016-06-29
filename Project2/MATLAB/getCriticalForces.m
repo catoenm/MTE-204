@@ -1,4 +1,4 @@
-function criticalForces = getCriticalForces(drivingDim, sctrIndex, isTensile,  E, L, ULTIMATE_STRENGTH, TRUSS_RATIO) 
+function [criticalForces, load] = getCriticalForces(drivingDim, sctrIndex, isTensile,  E, L, ULTIMATE_STRENGTH, TRUSS_RATIO) 
     % Calculate drivingCriticalForce from drivingDim
     if (isTensile) % tension member
         drivingCriticalForce = drivingDim * (ULTIMATE_STRENGTH * 3.175);
