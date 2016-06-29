@@ -71,7 +71,7 @@ length = sqrt((NODES(SCTR(:, 1), 1) - NODES(SCTR(:, 2), 1)).^2 ...
 numElements = size(SCTR,1);
 a = 1; % initial guess
 sctrIndex = 1; %TODO: fix this
-[criticalForces, load] = getCriticalForces(a, sctrIndex, SCTR, TRUSSRATIO); 
+[criticalForces, appliedLoad] = getCriticalForces(a, sctrIndex, SCTR, TRUSSRATIO); 
 
 drivingDimensions = zeros(numElements);
 
@@ -85,7 +85,7 @@ end
 mass = length.*area.*DENSITY + PINMASS;
 
 % Calculate PM
-pm = (5/6) * load .* mass.^(1.2/(1.2*1.3));
+pm = (5/6) * appliedLoad .* mass.^(1.2/(1.2*1.3));
 
 % ---------------------------------------------------------------------- %
 % Plot Data:
