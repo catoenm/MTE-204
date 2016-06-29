@@ -44,6 +44,9 @@ E = 2000;
 % Density of balsawood (Kg/m^3)
 DENSITY = 100;
 
+% Total mass of all pins in the bridge;
+PINMASS = 6 * massperpin;
+
 % ---------------------------------------------------------------------- %
 % Load data from text files:
 % ---------------------------------------------------------------------- %
@@ -63,13 +66,16 @@ length = sqrt((nodes(sctr(:, 1), 1) - nodes(sctr(:, 2), 1)).^2 ...
 % Calculate PMs for an array of gemoetric constraints :
 % ---------------------------------------------------------------------- %
 
+% Calculate area of each member
+
 % Calculate total mass of bridge 
+mass = length.*area.*DENSITY + PINMASS;
 
-mass = length.*area.*DENSITY;
+% Calcualate load based on critical stresses
+load = ???;
 
-% Calcualate load
-
-pm = (5/6) .* load .* mass.^(1.2/(1.2*1.3));
+% Calculate PM
+pm = (5/6) * load .* mass.^(1.2/(1.2*1.3));
 
 % ---------------------------------------------------------------------- %
 % Plot Data:
