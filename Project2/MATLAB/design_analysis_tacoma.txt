@@ -16,33 +16,33 @@ FC = 380.000000, FD = 3550.000000
 
 /// NODAL POSITIONS (mm)
 U1x  =    0.00000, U1y  =    0.00000
-U2x  =   -0.03315, U2y  =   -0.79884
+U2x  =   -0.00331, U2y  =   -1.23458
 U3x  =   -0.13259, U3y  =    0.00000
-U4x  =   -0.39989, U4y  =   -0.72260
+U4x  =   -0.87516, U4y  =   -0.18948
 
 /// NODAL FORCES (Newtons)
-F1x =    0.00000, F1y =   56.89800
-F2x =    0.00000, F2y =  -78.48000
+F1x =   -0.00000, F1y =   56.89800
+F2x =   -0.00000, F2y =  -78.48000
 F3x =    0.00000, F3y =   21.58200
-F4x =   -0.00000, F4y =   -0.00000
+F4x =    0.00000, F4y =   -0.00000
 
 /// Element Stresses (MPa)
 /// ID, Node 1, Node 2, STRESS[MPa]
 --------------------------------------------------------
-1, 1, 2, 0.602678 [Compression]
-2, 1, 4, 2.949634 [Tension]
-3, 2, 3, 0.685806 [Compression]
-4, 2, 4, 0.782920 [Compression]
-5, 3, 4, 2.994065 [Tension]
+1, 1, 2, 0.060268 [Compression]
+2, 1, 4, 2.027692 [Tension]
+3, 2, 3, 0.891548 [Compression]
+4, 2, 4, 1.138894 [Compression]
+5, 3, 4, 3.821079 [Tension]
 
 /// Element Internal Forces (N)
 /// ID, Node 1, Node 2, FORCE[N]
 --------------------------------------------------------
-1, 1, 2, 60.756006 [Compression]
-2, 1, 4, 83.238661 [Tension]
-3, 2, 3, 69.136145 [Compression]
-4, 2, 4, 78.926150 [Compression]
-5, 3, 4, 72.426441 [Tension]
+1, 1, 2, 6.075601 [Compression]
+2, 1, 4, 57.221459 [Tension]
+3, 2, 3, 89.876989 [Compression]
+4, 2, 4, 114.811946 [Compression]
+5, 3, 4, 92.431898 [Tension]
 
 /// Bucklin Analysis (Iyy -> ZBuckling) - Critical Force (N)
 /// ID, Node 1, Node 2, FORCE[N]
@@ -50,7 +50,7 @@ F4x =   -0.00000, F4y =   -0.00000
 1, 1, 2, 2586.091495 [No Buckling Failure]
 2, 1, 4, NaN [N/A - Tension]
 3, 2, 3, 416.599405 [No Buckling Failure]
-4, 2, 4, 3527.685390 [No Buckling Failure]
+4, 2, 4, 1667.084148 [No Buckling Failure]
 5, 3, 4, NaN [N/A - Tension]
 
 /// Bucklin Analysis (Izz -> YBuckling) - Critical Force (N)
@@ -59,14 +59,14 @@ F4x =   -0.00000, F4y =   -0.00000
 1, 1, 2, 932.982187 [No Buckling Failure]
 2, 1, 4, NaN [N/A - Tension]
 3, 2, 3, 189.441435 [No Buckling Failure]
-4, 2, 4, 1272.680273 [No Buckling Failure]
+4, 2, 4, 601.432632 [No Buckling Failure]
 5, 3, 4, NaN [N/A - Tension]
 
 /// Buckling Safety Factor
 /// ID, Node 1, Node 2, Safety Factor
 /// Element Internal Forces (N)
-1, 1, 2, 15.356213 
+1, 1, 2, 153.562132 
 2, 1, 4, NaN 
-3, 2, 3, 2.740121 
-4, 2, 4, 16.124951 
+3, 2, 3, 2.107786 
+4, 2, 4, 5.238415 
 5, 3, 4, NaN 
