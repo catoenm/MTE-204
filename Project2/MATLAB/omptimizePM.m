@@ -39,7 +39,7 @@ SCTR = load(strcat(DATA_FOLDER,'/sctr.txt'));
 % ---------------------------------------------------------------------- %
 
 % Range of values for driving dimention for which to calculate PM
-DRIVING_DIM = 1; %0.5:0.1:5; 
+DRIVING_DIM = 0:0.001:10; 
 
 % Index of element for the driving dimention 
 DRIVING_DIM_INDEX = 1; 
@@ -61,7 +61,7 @@ DENSITY = 0.0001;
 PINMASS = 6 * 0.4576; % 6 pins * 0.4576g/pin
 
 % Ultimate tensile strength of balsa (MPa)
-ULTIMATE_STRENGTH = 0.4;
+ULTIMATE_STRENGTH = 10;
 
 % Calculate length based on pythagorean theorem         
 length = sqrt((NODES(SCTR(:, 1), 1) - NODES(SCTR(:, 2), 1)).^2 ...
@@ -73,25 +73,28 @@ numElements = size(SCTR,1);
 % Calculate PMs for an array of gemoetric constraints :
 % ---------------------------------------------------------------------- %
 
-[criticalForces, appliedLoad] = getCriticalForces(DRIVING_DIM, DRIVING_DIM_INDEX,  E, length, ULTIMATE_STRENGTH, TRUSS_RATIO); 
+for x = 1:size(DRIVING_DIM,2)
+    [criticalForces, appliedLoad] = getCriticalForces(DRIVING_DIM(x), DRIVING_DIM_INDEX,  E, length, ULTIMATE_STRENGTH, TRUSS_RATIO); 
 
-drivingDimensions = zeros(numElements,1);
-areas = zeros(numElements,1);
+    drivingDimensions = zeros(numElements,1);
+    areas = zeros(numElements,1);
 
-for x = 1:1:numElements
-    [drivingDimensions(x), areas(x)] = getMemberDimension(criticalForces(x), E, length(x), ULTIMATE_STRENGTH);
+    for y = 1:1:numElements
+        [drivingDimensions(y), areas(y)] = getMemberDimension(criticalForces(y), E, length(y), ULTIMATE_STRENGTH);
+    end
+
+    % Calculate total mass of bridge 
+    element_mass = length.*areas.*DENSITY; 
+    total_mass = sum(element_mass)*2+PINMASS;
+    total_applied_load_grams = 2*abs(appliedLoad)*1000/9.81;
+
+    % Calculate PM
+    pm(x) = (5/6) * total_applied_load_grams /( total_mass^(1/1.3));
 end
-
-% Calculate total mass of bridge 
-element_mass = length.*areas.*DENSITY; 
-total_mass = sum(element_mass)*2+PINMASS
-total_applied_load_grams = 2*abs(appliedLoad)*1000/9.81
-
-% Calculate PM
-pm = (5/6) * total_applied_load_grams /( total_mass^(1/1.3))
 
 % ---------------------------------------------------------------------- %
 % Plot Data:
 % ---------------------------------------------------------------------- %
 
+plot(DRIVING_DIM,pm)
 
