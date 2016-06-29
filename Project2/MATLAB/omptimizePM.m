@@ -38,40 +38,52 @@ TRUSSRATIO = [ -0.7742;
                -1.0057;
                 0.9229 ];
 
-% Young's modulus of balsawood (mPa): 
+% Young's modulus of balsawood (MPa): 
 E = 2000;
 
-% Density of balsawood (Kg/m^3)
+% Density of balsawood (kg/m^3)
 DENSITY = 100;
 
 % Total mass of all pins in the bridge;
 PINMASS = 6 * massperpin;
 
+% Ultimate tensile strength of balsa (MPa)
+ULTIMATE_STRENGTH = 0.4;
+
 % ---------------------------------------------------------------------- %
 % Load data from text files:
 % ---------------------------------------------------------------------- %
 
-nodes = load(strcat(DATAFOLDER,'/nodes.txt'));
-sctr = load(strcat(DATAFOLDER,'/sctr.txt'));
+NODES = load(strcat(DATAFOLDER,'/nodes.txt'));
+SCTR = load(strcat(DATAFOLDER,'/sctr.txt'));
 
 % ---------------------------------------------------------------------- %
 % Calculate trivial values for future steps:
 % ---------------------------------------------------------------------- %
 
 % Calculate length based on pythagorean theorem         
-length = sqrt((nodes(sctr(:, 1), 1) - nodes(sctr(:, 2), 1)).^2 ...
-            + (nodes(sctr(:, 1), 2) - nodes(sctr(:, 2), 2)).^2);
+length = sqrt((NODES(SCTR(:, 1), 1) - NODES(SCTR(:, 2), 1)).^2 ...
+            + (NODES(SCTR(:, 1), 2) - NODES(SCTR(:, 2), 2)).^2);
 
 % ---------------------------------------------------------------------- %
 % Calculate PMs for an array of gemoetric constraints :
 % ---------------------------------------------------------------------- %
+numElements = size(SCTR,1);
+a = 1; % initial guess
+sctrIndex = 1; %TODO: fix this
+[criticalForces, load] = getCriticalForces(a, sctrIndex, SCTR, TRUSSRATIO); 
+
+drivingDimensions = zeros(numElements);
+
+for x = 1:1:numElements
+    drivingDimensions(x) = getMemberDimension(criticalForces(x), E, ULTIMATE_STRENGTH);
+end
 
 % Calculate area of each member
 
 % Calculate total mass of bridge 
 mass = length.*area.*DENSITY + PINMASS;
 
-% Calcualate load based on critical stresses
 load = ???;
 
 % Calculate PM

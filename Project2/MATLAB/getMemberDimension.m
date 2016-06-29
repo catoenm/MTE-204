@@ -1,6 +1,6 @@
-function dim = getMemberDimension(forceCritical, E, ultimateStress)
+function dim = getMemberDimension(forceCritical, E, ultimateStrength)
     if (forceCritical < 0) % tension member
-        dim = forceCritical/(ultimateStress * 3.175);
+        dim = forceCritical/(ultimateStrength * 3.175);
     else % compression member
         I = (forceCritical * L^2)/(E * pi^2);
         ay = (I - 541.967)/298.722;
