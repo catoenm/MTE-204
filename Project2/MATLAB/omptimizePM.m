@@ -84,8 +84,6 @@ end
 % Calculate total mass of bridge 
 mass = length.*area.*DENSITY + PINMASS;
 
-load = ???;
-
 % Calculate PM
 pm = (5/6) * load .* mass.^(1.2/(1.2*1.3));
 
