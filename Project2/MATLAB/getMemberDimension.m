@@ -7,6 +7,6 @@ function [dim, area] = getMemberDimension(forceCritical, E, ultimateStrength)
         ay = (I - 541.967)/298.722;
         az = (((I - 16.937)/0.529)^(1/3) - 3.175)/2;
         dim = max(ay, az); % weaker axis of failure dictates minimum a
-        area = 12.7*(2*dim + 3.175) - 12.7*dim; % area of 'I' member
+        area = 12.7*dim - 40.3225; % area of 'I' member
     end    
 end

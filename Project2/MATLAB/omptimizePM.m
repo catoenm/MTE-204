@@ -29,10 +29,16 @@ close all;
 % Constants:
 % ---------------------------------------------------------------------- %
 
+% Range of values for driving dimention for which to calculate PM
+DRIVING_DIM = 1; 
+
+% Index of element for the driving dimention 
+DRIVING_DIM_INDEX = 1; 
+
 DATAFOLDER = 'tacoma';
 
 % trussRatio maps the applied load to the force in a given member
-TRUSSRATIO = [ -0.7742;
+TRUSS_RATIO = [ -0.7742;
                 1.0606;
                -0.8809;
                -1.0057;
@@ -65,13 +71,13 @@ SCTR = load(strcat(DATAFOLDER,'/sctr.txt'));
 length = sqrt((NODES(SCTR(:, 1), 1) - NODES(SCTR(:, 2), 1)).^2 ...
             + (NODES(SCTR(:, 1), 2) - NODES(SCTR(:, 2), 2)).^2);
 
+numElements = size(SCTR,1);
+
 % ---------------------------------------------------------------------- %
 % Calculate PMs for an array of gemoetric constraints :
 % ---------------------------------------------------------------------- %
-numElements = size(SCTR,1);
-a = 1; % initial guess
-sctrIndex = 1; %TODO: fix this
-[criticalForces, appliedLoad] = getCriticalForces(a, sctrIndex, SCTR, TRUSSRATIO); 
+
+[criticalForces, appliedLoad] = getCriticalForces(DRIVING_DIM, DRIVING_DIM_INDEX,  E, L, ULTIMATE_STRENGTH, TRUSS_RATIO); 
 
 drivingDimensions = zeros(numElements);
 areas = zeros(numElements);
@@ -79,8 +85,6 @@ areas = zeros(numElements);
 for x = 1:1:numElements
     [drivingDimensions(x), areas(x)] = getMemberDimension(criticalForces(x), E, ULTIMATE_STRENGTH);
 end
-
-% Calculate area of each member
 
 % Calculate total mass of bridge 
 mass = length.*area.*DENSITY + PINMASS;
