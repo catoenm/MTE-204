@@ -39,7 +39,7 @@ SCTR = load(strcat(DATA_FOLDER,'/sctr.txt'));
 % ---------------------------------------------------------------------- %
 
 % Range of values for driving dimention for which to calculate PM
-DRIVING_DIM = 1 %0.5:0.1:5; 
+DRIVING_DIM = 1; %0.5:0.1:5; 
 
 % Index of element for the driving dimention 
 DRIVING_DIM_INDEX = 1; 
@@ -83,10 +83,12 @@ for x = 1:1:numElements
 end
 
 % Calculate total mass of bridge 
-mass = length.*areas.*DENSITY + PINMASS;
+element_mass = length.*areas.*DENSITY; 
+total_mass = sum(element_mass)*2+PINMASS
+total_applied_load_grams = 2*abs(appliedLoad)*1000/9.81
 
 % Calculate PM
-pm = (5/6) * abs(appliedLoad)*1000/9.81 * sum(mass)^(1.2/(1.2*1.3));
+pm = (5/6) * total_applied_load_grams * total_mass^(1.2/(1.2*1.3))
 
 % ---------------------------------------------------------------------- %
 % Plot Data:
